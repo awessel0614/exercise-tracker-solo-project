@@ -20,6 +20,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import CalendarPage from '../CalendarPage/CalendarPage';
+import DayPage from '../DayPage/DayPage';
 
 import './App.css';
 
@@ -55,24 +56,23 @@ function App() {
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
           <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
-            exact
-            path="/user"
-          >
+            exact path="/user">
             <UserPage />
           </ProtectedRoute>
 
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
-            exact
-            path="/info"
-          >
+            exact path="/info">
             <InfoPage />
           </ProtectedRoute>
 
-          <Route
-            exact
-            path="/login"
-          >
+          <ProtectedRoute
+            // logged in shows DayPage else shows LoginPage
+            exact path="/day">
+            <DayPage />
+          </ProtectedRoute>
+
+          <Route exact path="/login">
             {user.id ?
               // If the user is already logged in, 
               // redirect to the /user page
@@ -83,10 +83,7 @@ function App() {
             }
           </Route>
 
-          <Route
-            exact
-            path="/registration"
-          >
+          <Route exact path="/registration">
             {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
@@ -97,10 +94,7 @@ function App() {
             }
           </Route>
 
-          <Route
-            exact
-            path="/home"
-          >
+          <Route exact path="/home">
             {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
@@ -115,6 +109,7 @@ function App() {
             <CalendarPage />
           </Route>
 
+         
 
 
           {/* If none of the other routes matched, we will show a 404. */}
