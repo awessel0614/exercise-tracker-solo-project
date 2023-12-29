@@ -21,6 +21,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import CalendarPage from '../CalendarPage/CalendarPage';
 import DayPage from '../DayPage/DayPage';
+import AddExerciseForm from '../AddExerciseForm/AddExerciseForm';
 
 import './App.css';
 
@@ -70,6 +71,12 @@ function App() {
             // logged in shows DayPage else shows LoginPage
             exact path="/day">
             <DayPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows DayPage else shows LoginPage
+            exact path="/form">
+            <AddExerciseForm />
           </ProtectedRoute>
 
           <Route exact path="/login">
