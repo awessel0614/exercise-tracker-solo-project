@@ -53,12 +53,20 @@ function AddExerciseForm() {
 
 
         const addSetRepRow = () => {
+            setFormFields([...formFields, { set_number: '', reps: ''}])
+        }
 
+        const deleteSetRepRow = (index) => {
+            const values = [...formFields];
+            values.splice(index,1);
+            setFormFields(values);
+            console.log('here are the values after row deletion:', formFields)
         }
 
 
         const handleSubmit = () => {
-
+            event.preventDefault();
+            console.log("here are the form fields", formFields)
         }
 
 
@@ -87,7 +95,7 @@ function AddExerciseForm() {
         <h1>Enter Exercise Info:</h1>
 
         <Box sx={{ minWidth: 120 }}>
-            <FormControl fullWidth>
+            <FormControl onSubmit={handleSubmit} fullWidth>
                 <InputLabel id="demo-simple-select-label">Select Exercise</InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
@@ -108,7 +116,7 @@ function AddExerciseForm() {
                         <div key={index}>
                             <TextField 
                                 name="set_number"
-                                placeholder="Set 1"
+                                placeholder="Set #"
                                 variant="filled"
                                 onChange={event => handleFormChange(event, index)}
                                 value={form.set_number}
@@ -120,72 +128,30 @@ function AddExerciseForm() {
                                 onChange={event => handleFormChange(event, index)}
                                 value={form.reps}
                             />
+                            <br></br>
+                            <Button 
+                                onClick={() => deleteSetRepRow(index)}
+                            >Delete Set/Rep</Button>
                         </div>
                         </>
                     )
                })}
                </div>
             </FormControl>
-            <Button onClick={addSetRepRow}>Add Set/Rep</Button>
+            <Button 
+                onClick={() => addSetRepRow()}
+            >Add Set/Rep</Button>
             <br></br>
-            <Button onClick={handleSubmit}>Submit</Button>
+            <Button 
+                onClick={handleSubmit}
+            >Submit</Button>
         </Box>
 
         <br></br>
         <p>this is the id of the selected exercise: {selectedExercise.exercise_id}</p>
-        <p>this is set number: {formFields.set_number}</p>
         </>
     )
 
 }
 
 export default AddExerciseForm;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{/* <Grid alignItems="center">
-<TextField 
-id="outlined-basic" 
-label="Set1" 
-variant="outlined" 
-style={{maxWidth: '50px', maxHeight: '30px', minWidth: '60px', minHeight: '30px'}}
-onChange={handleSetChange}
-/>
-<br></br>
-<br></br>
-<br></br>
-<Button 
-variant="contained"
-style={{maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px'}}
->+</Button>
-<Button 
-variant="contained"
-style={{maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px'}}
->-</Button>
-</Grid>
-<br></br>
-<br></br>
-<TextField 
-id="outlined-basic" 
-label="Rep1" 
-variant="outlined" 
-style={{maxWidth: '50px', maxHeight: '30px', minWidth: '80px', minHeight: '30px'}}
-onChange={handleRepChange}
-/>
-<br></br>
-<br></br> */}
