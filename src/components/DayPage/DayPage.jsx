@@ -23,7 +23,7 @@ function DayPage() {
                 <li key={i}>This is the set number:{session.set_number}</li>
             )}
         </ul>
-            <p>Well hey there! I'm the daaaay page ^_^</p>
+            <p>I'm the day page!</p>
             <Button
                 variant="contained"
                 onClick={goToExerciseForm}
