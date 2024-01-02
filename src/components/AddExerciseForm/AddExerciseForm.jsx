@@ -17,59 +17,6 @@
 
 // function AddExerciseForm() {
 
-//         const [selectedExercise, setSelectedExercise] = useState({
-//             //session_id: '',
-//             exercise_id: 'test',
-//             //set_number: '',
-//             //reps: '',
-//             //weight: '',
-//             //isToggled: false
-//         });
-
-//         const handleExerciseChange = (event) => { 
-//            setSelectedExercise({
-//                 ...selectedExercise,
-//                 exercise_id: event.target.value,
-//            }) 
-//            console.log("this is the event.target.value for exercise ID", event.target.value);
-//         };
-
-
-
-
-//         const [formFields, setFormFields] = useState([
-//             {set_number: '', reps: ''},
-//             {set_number: '', reps: ''},
-
-//         ]);
-
-//         const handleFormChange = (event, index) => { 
-//             //uses spread operator to grab the state of the values
-//             const values = [...formFields];
-//             values[index][event.target.name] = event.target.value;
-//             setFormFields(values);
-//             console.log('these are the values:', formFields )
-//          };
-
-
-//         const addSetRepRow = () => {
-//             setFormFields([...formFields, { set_number: '', reps: ''}])
-//         }
-
-//         const deleteSetRepRow = (index) => {
-//             const values = [...formFields];
-//             values.splice(index,1);
-//             setFormFields(values);
-//             console.log('here are the values after row deletion:', formFields)
-//         }
-
-
-//         const handleSubmit = () => {
-//             event.preventDefault();
-//             console.log("here are the form fields", formFields)
-//         }
-
-
 //     const dispatch = useDispatch();
 //     const exercises = useSelector(store => store.exercises)
 
@@ -90,9 +37,57 @@
 //     }, []);
 
 
+//         const [selectedExercise, setSelectedExercise] = useState([{
+//             //session_id: '',
+//             exercise_id: '',
+//             set_number: '',
+//             reps: '',
+//             //weight: '',
+//             //isToggled: false
+//         }]);
+
+//         const handleExerciseChange = (event) => { 
+//            event.preventDefault();
+//            setSelectedExercise([
+//                 //...selectedExercise,
+//                 {exercise_id: event.target.value},
+//            ]) 
+//            console.log("this is the event.target.value for exercise ID", event.target.value);
+//         };
+
+
+//         const handleFormChange = (event, index) => { 
+//             //uses spread operator to grab the state of the values
+//             const values = [...selectedExercise];
+//             values[index][event.target.name] = event.target.value;
+//             setSelectedExercise(values);
+//             console.log('these are the values:', selectedExercise )  
+//          };
+
+
+//         const addSetRepRow = () => {
+//             setSelectedExercise([...selectedExercise, {exercise_id: selectedExercise[0].exercise_id, set_number: '', reps: ''}])
+//         }
+
+//         const deleteSetRepRow = (index) => {
+//             const values = [...selectedExercise];
+//             values.splice(index,1);
+//             setSelectedExercise(values);
+//             console.log('here are the values after row deletion:', selectedExercise)
+//         }
+
+//         const handleSubmit = () => {
+//             event.preventDefault();
+//             console.log("here are the form fields", selectedExercise)
+//             axios.post
+//         }
+
+
+
+
 //     return (
 //         <>
-//         <h1>Enter Exercise Info:</h1>
+//         <h1>Enter Exercise Info:</h1> 
 
 //         <Box sx={{ minWidth: 120 }}>
 //             <FormControl onSubmit={handleSubmit} fullWidth>
@@ -101,7 +96,6 @@
 //                         labelId="demo-simple-select-label"
 //                         id="demo-simple-select"
 //                         label="selectedExercise"
-//                         //name="selectedExercise.exercise_id"
 //                         onChange={handleExerciseChange}
 //                         >
 //                         {exercises.map((exercise, i) =>
@@ -110,9 +104,8 @@
 //                     </Select>
 //                     <br></br>
 //                 <div>
-//                {formFields.map((form, index) => {
+//                {selectedExercise.map((form, index) => {
 //                     return (
-//                         <>
 //                         <div key={index}>
 //                             <TextField 
 //                                 name="set_number"
@@ -133,7 +126,6 @@
 //                                 onClick={() => deleteSetRepRow(index)}
 //                             >Delete Set/Rep</Button>
 //                         </div>
-//                         </>
 //                     )
 //                })}
 //                </div>
@@ -148,7 +140,7 @@
 //         </Box>
 
 //         <br></br>
-//         <p>this is the id of the selected exercise: {selectedExercise.exercise_id}</p>
+//         <p>this is the id of the selected exercise: {selectedExercise[0].exercise_id}</p>
 //         </>
 //     )
 
@@ -157,7 +149,24 @@
 // export default AddExerciseForm;
 
 
-// ^^ this works-- keeping the dynamic form inputs in their own separate variable
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -188,6 +197,7 @@ import './AddExerciseForm.css';
 
 function AddExerciseForm() {
 
+    let history = useHistory();
     const dispatch = useDispatch();
     const exercises = useSelector(store => store.exercises)
 
@@ -247,9 +257,13 @@ function AddExerciseForm() {
             console.log('here are the values after row deletion:', selectedExercise)
         }
 
-        const handleSubmit = () => {
+        const handleSubmit = (event) => {
             event.preventDefault();
             console.log("here are the form fields", selectedExercise)
+            dispatch({ type: 'SEND_SESSION_DETAILS_TO_SERVER', payload: selectedExercise });
+            setSelectedExercise([{exercise_id: '', set_number: '', reps: ''}]);
+
+            history.push('/day');
         }
 
 
