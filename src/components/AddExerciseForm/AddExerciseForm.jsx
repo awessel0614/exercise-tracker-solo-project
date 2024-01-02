@@ -210,9 +210,9 @@ function AddExerciseForm() {
 
         const [selectedExercise, setSelectedExercise] = useState([{
             //session_id: '',
-            exercise_id: 'test',
-            set_number: 'testing',
-            reps: 'still testing',
+            exercise_id: '',
+            set_number: '',
+            reps: '',
             //weight: '',
             //isToggled: false
         }]);
@@ -227,21 +227,12 @@ function AddExerciseForm() {
         };
 
 
-
-
-        // const [formFields, setFormFields] = useState([
-        //     {set_number: '', reps: ''},
-        //     {set_number: '', reps: ''},
-
-        // ]);
-
         const handleFormChange = (event, index) => { 
             //uses spread operator to grab the state of the values
             const values = [...selectedExercise];
             values[index][event.target.name] = event.target.value;
             setSelectedExercise(values);
-            console.log('these are the values:', selectedExercise )
-            
+            console.log('these are the values:', selectedExercise )  
          };
 
 
@@ -256,19 +247,17 @@ function AddExerciseForm() {
             console.log('here are the values after row deletion:', selectedExercise)
         }
 
-
         const handleSubmit = () => {
             event.preventDefault();
             console.log("here are the form fields", selectedExercise)
         }
 
 
-    
 
 
     return (
         <>
-        <h1>Enter Exercise Info:</h1>
+        <h1>Enter Exercise Info:</h1> 
 
         <Box sx={{ minWidth: 120 }}>
             <FormControl onSubmit={handleSubmit} fullWidth>
@@ -321,7 +310,7 @@ function AddExerciseForm() {
         </Box>
 
         <br></br>
-        <p>this is the id of the selected exercise: {selectedExercise.exercise_id}</p>
+        <p>this is the id of the selected exercise: {selectedExercise[0].exercise_id}</p>
         </>
     )
 
