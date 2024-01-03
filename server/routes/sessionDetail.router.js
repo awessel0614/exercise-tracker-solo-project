@@ -2,12 +2,16 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-/**
- * GET route template
- */
+
+
 router.get('/', (req, res) => {
-    
-  // GET route code here
+  console.log("in sessionDetailrouter GET")
+  pool.query('SELECT * FROM "session_details";').then((result) => {
+    res.send(result.rows);
+  }).catch((error) => {
+    console.log('Error in GET /api/sessionDetail', error);
+    res.sendStatus(500);
+  }); 
 });
 
 
@@ -51,6 +55,8 @@ router.post('/', async (req, res) => {
             VALUES ($1) RETURNING "id";
         `;
         const result = await db.query(queryText, [req.user.id]);
+        console.log('this is the result', result)
+        console.log('this is the result.rows', result.rows);
         const sessionId = result.rows[0].id;
         
         queryText = `
@@ -73,7 +79,11 @@ router.post('/', async (req, res) => {
 });
 
 
-
+// NOTE TO SELF: I think i need to move the "INSERT INTO "session" part (line 50) into my session router
+//once I create that... because right now it's creating a session each time i enter an exercise,
+// which isn't what I'm going for... I want to create ONE session with MULTIPLE exercises.
+//If I'm not mistaken, i will create the session on the calendar page when a date is selected,
+// and do a dispatch on the calendar page
 
 
 

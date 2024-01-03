@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { TextField, Button, Grid, Container } from "@mui/material";
@@ -6,8 +7,24 @@ import './DayPage.css';
 
 
 function DayPage() {
+    const dispatch = useDispatch();
     let history = useHistory();
     const sessionDetails = useSelector(store => store.sessionDetails)
+
+
+    const getSessionDetails = () => {
+        axios.get('/api/sessionDetail').then((response) => {
+            const action = { type: 'FETCH_SESSION_DETAILS', payload: response.data};
+            dispatch(action);
+        }).catch((error) => {
+            console.log('Error in getting session details', error);
+            alert('Something went wrong!');
+        })
+    }
+
+    useEffect(() => {
+        getSessionDetails();
+    }, []);
 
 
     const goToExerciseForm = (event) => {
