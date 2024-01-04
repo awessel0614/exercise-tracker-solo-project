@@ -23,8 +23,19 @@ function DayPage() {
         })
     }
 
+    const getSession = () => {
+        axios.get('/api/session').then((response) => {
+            const action = { type: 'FETCH_SESSION', payload: response.data};
+            dispatch(action);
+        }).catch((error) => {
+            console.log('Error in getting session', error);
+            alert('Something went wrong!');
+        })
+    }
+
     useEffect(() => {
         getSessionDetails();
+        getSession();
     }, []);
 
 
@@ -45,7 +56,7 @@ function DayPage() {
             )}
         </ul>
             <p>I'm the day page!</p>
-            
+            {/* <p>{session[4].session_date}</p> */}
             <Button
                 variant="contained"
                 onClick={goToExerciseForm}
