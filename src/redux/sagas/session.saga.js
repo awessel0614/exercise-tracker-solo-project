@@ -30,8 +30,8 @@ function* sendSessionToServer(action) {
 
 
 function* sessionSaga() {
-    yield takeLatest('SEND_SESSION_DETAILS_TO_SERVER', sendSessionToServer);
-    yield takeLatest('FETCH_SESSION_DETAILS', fetchSession);
+    yield takeLatest('SEND_SESSION_TO_SERVER', sendSessionToServer);
+    yield takeLatest('FETCH_SESSION', fetchSession);
 }
 
 export default sessionSaga;

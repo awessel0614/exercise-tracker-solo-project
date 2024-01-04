@@ -45,7 +45,7 @@ router.get('/', (req, res) => {
 
 
 router.post('/', async (req, res) => {
-    console.log('in POST,', req.body)
+    console.log('in POST for session detail router,', req.body)
     const db = await pool.connect();
     try {
         await db.query('BEGIN');

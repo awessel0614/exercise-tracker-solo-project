@@ -10,6 +10,7 @@ function DayPage() {
     const dispatch = useDispatch();
     let history = useHistory();
     const sessionDetails = useSelector(store => store.sessionDetails)
+    const session = useSelector(store => store.session)
 
 
     const getSessionDetails = () => {
@@ -36,14 +37,15 @@ function DayPage() {
     return (
         <>
         <ul>
-            {sessionDetails.map((session, i) =>
+            {sessionDetails.map((detail, i) =>
                 <>
-                <li key={i}>This is the set number:{session.set_number}</li>
-                <li>These are the reps{session.reps}</li>
+                <li key={i}>This is the set number:{detail.set_number}</li>
+                <li>These are the reps{detail.reps}</li>
                 </>
             )}
         </ul>
             <p>I'm the day page!</p>
+            
             <Button
                 variant="contained"
                 onClick={goToExerciseForm}
