@@ -191,6 +191,8 @@ export default App;
 
 // import { LocalizationProvider } from '@mui/x-date-pickers';
 // import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+// import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
+// import { StaticDatePicker } from '@mui/x-date-pickers';
 
 // import './App.css';
 
@@ -205,7 +207,7 @@ export default App;
 
 //   return (
 //     <>
-//     <LocalizationProvider dateAdapter={AdapterDayjs}>
+//     <LocalizationProvider dateAdapter={AdapterDateFns}>
 //     <Router>
 //       <div>
 //         <Nav />
@@ -310,4 +312,4 @@ export default App;
 
 
 
-//this is the version with the calendar
+// // this is the version with the calendar

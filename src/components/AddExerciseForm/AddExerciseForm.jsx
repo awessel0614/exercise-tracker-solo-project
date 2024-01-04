@@ -201,6 +201,22 @@ function AddExerciseForm() {
 
         let history = useHistory();
 
+
+        const getExercises = () => {
+            axios.get('/api/exercise').then((response) => {
+                const action = {type: 'SET_EXERCISES', payload: response.data};
+                console.log("this is the payload", response.data )
+                dispatch(action);
+            }).catch((error) => {
+                console.log('Error getting exercise list.', error);
+                alert('Something went wrong!')
+            })
+        }
+    
+        useEffect(() => {
+            getExercises();
+        }, []);
+
         const [selectedExercise, setSelectedExercise] = useState({
             //session_id: '',
             exercise_id: 'test',
@@ -249,7 +265,7 @@ function AddExerciseForm() {
             dispatch({ type: 'SEND_SESSION_DETAILS_TO_SERVER', payload: {selectedExercise, formFields} });
             setSelectedExercise([{exercise_id: '', set_number: '', reps: ''}]);
 
-            //history.push('/day');
+            history.push('/day');
         }
 
 
@@ -257,20 +273,7 @@ function AddExerciseForm() {
     const exercises = useSelector(store => store.exercises)
 
 
-    const getExercises = () => {
-        axios.get('/api/exercise').then((response) => {
-            const action = {type: 'SET_EXERCISES', payload: response.data};
-            console.log("this is the payload", response.data )
-            dispatch(action);
-        }).catch((error) => {
-            console.log('Error getting exercise list.', error);
-            alert('Something went wrong!')
-        })
-    }
-
-    useEffect(() => {
-        getExercises();
-    }, []);
+    
 
 
     return (

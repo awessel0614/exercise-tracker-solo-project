@@ -49,14 +49,12 @@ router.post('/', async (req, res) => {
     const db = await pool.connect();
     try {
         await db.query('BEGIN');
-        //Create a new session
+        //Creates a new session
         let queryText = `
             INSERT INTO "session" ("user_id")
             VALUES ($1) RETURNING "id";
         `;
         const result = await db.query(queryText, [req.user.id]);
-        console.log('this is the result', result)
-        console.log('this is the result.rows', result.rows);
         const sessionId = result.rows[0].id;
         
         queryText = `
@@ -64,7 +62,7 @@ router.post('/', async (req, res) => {
             VALUES ($1, $2, $3, $4);
         `;
         for(let exercise of req.body.formFields) {
-            //inserts three rows of details
+            //inserts X rows of these details (it's a dynamic amount, based on the user)
             await db.query(queryText, [req.body.selectedExercise.exercise_id, sessionId, exercise.set_number, exercise.reps]);
         }
         await db.query('COMMIT');
@@ -77,6 +75,11 @@ router.post('/', async (req, res) => {
         db.release();
     }
 });
+
+
+
+
+
 
 
 // NOTE TO SELF: I think i need to move the "INSERT INTO "session" part (line 50) into my session router

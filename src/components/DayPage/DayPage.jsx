@@ -37,7 +37,10 @@ function DayPage() {
         <>
         <ul>
             {sessionDetails.map((session, i) =>
+                <>
                 <li key={i}>This is the set number:{session.set_number}</li>
+                <li>These are the reps{session.reps}</li>
+                </>
             )}
         </ul>
             <p>I'm the day page!</p>
