@@ -137,14 +137,11 @@ function DayPage() {
             dispatch(action);
     }
 
-
-
-    // narrow down the exercise_id in the session_details table so there are no duplicates,
-    // then get the associated exercise_name from "exercise" (via the exercise_id), and the session_date
-    //from "session" via session_id
-
-    // getSession is taking care of getting my sets and reps
-    // i need another
+// ^^ i think i need to restructure this somehow... right now it's getting the session details for the entire day
+// but i'm finding it difficult to map over that correctly
+// maybe i need to do an async GET that gets the sets and reps for a particular exercise on that particular day?
+// OR maybe i'll just create a "view details" button on each exercise that, when I click it, grabs the 
+// exercise_ID of the
 
 
     useEffect(() => {
@@ -161,7 +158,7 @@ function DayPage() {
     }
     return (
         <>
-
+            <h1> {session[0].session_date}</h1>
             <Button
                 variant="contained"
                 onClick={goToExerciseForm}
@@ -184,19 +181,14 @@ function DayPage() {
                             key = {item.id}
                           >
                               <CardContent>
-                                      <h1>Exercise Name: {item.exercise_name}</h1>
+                                      <h2>Exercise: {item.exercise_name}</h2>
                                       {sessionDetails.map((detail, i) => {
                                             return (
                                                 <>
-                                                <TextField > Set Number: {detail.set_number}</TextField>
-                                                    
+                                                <p> Set Number: {detail.set_number} </p>
                                                 </>
                                             )
                                       })}
-
-
-                                      {/* <h2>Set Number:</h2>
-                                      <h3>Reps:</h3> */}
                               </CardContent>
                           </Card>
                         </Paper>
@@ -206,21 +198,10 @@ function DayPage() {
             })}
         </Grid>
 
-
-
-
-
-
-
-
-
-
-
         <ul>
             {sessionDetails.map((detail, i) =>
                 <>
-                <li key={i}>This is the set number:{detail.set_number}</li>
-                <li>These are the reps{detail.reps}</li>
+                <li key={i}>Set Number: {detail.set_number} Reps: {detail.reps} </li>
                 </>
             )}
         </ul>
