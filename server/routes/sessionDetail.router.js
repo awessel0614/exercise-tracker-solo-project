@@ -19,7 +19,12 @@ const router = express.Router();
 //to be variable
 router.get('/', (req, res) => {
     console.log("in sessionDetailrouter GET")
-    pool.query('SELECT * FROM "session_details" WHERE "session_id" = 25;').then((result) => {
+    pool.query(
+        `SELECT * FROM "session_details"
+        JOIN "exercise" on "exercise"."id" = "session_details"."exercise_id"
+        JOIN "session" on "session"."id" = "session_details"."session_id"
+        WHERE "session_id" = 25;`
+        ).then((result) => {
       res.send(result.rows);
     }).catch((error) => {
       console.log('Error in GET /api/sessionDetail', error);

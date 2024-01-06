@@ -131,27 +131,20 @@ function DayPage() {
         })
     }
     
-    
-
-    // const getSessionDetails = () => {
-    //     axios.get('/api/sessionDetail').then((response) => {
-    //         const action = { type: 'FETCH_SESSION_DETAILS', payload: response.data};
-    //         dispatch(action);
-    //     }).catch((error) => {
-    //         console.log('Error in getting session details', error);
-    //         alert('Something went wrong!');
-    //     })
-    // }
-    
-    // ^^ this was the original one i had but the one below is doing the same thing so
-    // i don't think i need it
 
     const getSessionDetails = () => {
-        
             const action = { type: 'FETCH_SESSION_DETAILS'};
             dispatch(action);
-    
     }
+
+
+
+    // narrow down the exercise_id in the session_details table so there are no duplicates,
+    // then get the associated exercise_name from "exercise" (via the exercise_id), and the session_date
+    //from "session" via session_id
+
+    // getSession is taking care of getting my sets and reps
+    // i need another
 
 
     useEffect(() => {
@@ -184,8 +177,9 @@ function DayPage() {
                             key = {detail.id}
                           >
                               <CardContent>
-                                      <h3>Set Number:{detail.set_number}</h3>
-                                      <h2>Reps:{detail.reps}</h2>
+                                      <h1>Exercise Name: {detail.exercise_name}</h1>
+                                      <h2>Set Number:{detail.set_number}</h2>
+                                      <h3>Reps:{detail.reps}</h3>
                               </CardContent>
                           </Card>
                         </Paper>
