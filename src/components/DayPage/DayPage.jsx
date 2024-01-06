@@ -180,19 +180,33 @@ function DayPage() {
                         <Paper elevation={8}>
                           <Card 
                             style = 
-                            {{ height: '350px', 
+                            {{ height: '600px', 
                             width: '225px', 
                             paddingBottom:'30px', 
                             backgroundColor: "lightblue"}} 
                               
                             key = {item.id}
                           >
-                              <CardContent>
+                              {/* <CardContent>
                                       <h2>Exercise: {item.exercise_name}</h2>
                                       {sessionDetails.map((detail, i) => {
                                             return (
                                                 <>
                                                 <p> Set Number: {detail.set_number} </p>
+                                                </>
+                                            )
+                                      })}
+                              </CardContent> */}
+
+
+
+                              <CardContent>
+                                      <h2>Exercise: {item.exercise_name}</h2>
+                                      {sessionDetails.map((detail, i) => {
+                                            return (
+                                                <>
+                                                <p> Set: {detail.set_number} </p>
+                                                <p> Reps: {detail.reps}</p>
                                                 </>
                                             )
                                       })}
