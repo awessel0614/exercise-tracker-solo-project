@@ -161,6 +161,12 @@ function DayPage() {
     }
     return (
         <>
+
+            <Button
+                variant="contained"
+                onClick={goToExerciseForm}
+                >Add Exercise</Button>
+                
             <Grid container sx={{justifyContent: "center"}}>
             {sessionDetails.map(detail => {
                 return (
@@ -218,10 +224,7 @@ function DayPage() {
         </ul>
             
             
-            <Button
-                variant="contained"
-                onClick={goToExerciseForm}
-                >Add Exercise</Button>
+            
         </>
     )
 }
