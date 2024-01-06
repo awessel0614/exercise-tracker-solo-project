@@ -130,7 +130,7 @@ function DayPage() {
             alert('Something went wrong!');
         })
     }
-    
+
 
     const getSessionDetails = () => {
             const action = { type: 'FETCH_SESSION_DETAILS'};
@@ -166,9 +166,10 @@ function DayPage() {
                 variant="contained"
                 onClick={goToExerciseForm}
                 >Add Exercise</Button>
+
                 
             <Grid container sx={{justifyContent: "center"}}>
-            {sessionDetails.map(detail => {
+            {session.map(item => {
                 return (
                     <>
                       <Grid margin = {'15px'}>
@@ -180,12 +181,22 @@ function DayPage() {
                             paddingBottom:'30px', 
                             backgroundColor: "lightblue"}} 
                               
-                            key = {detail.id}
+                            key = {item.id}
                           >
                               <CardContent>
-                                      <h1>Exercise Name: {detail.exercise_name}</h1>
-                                      <h2>Set Number:{detail.set_number}</h2>
-                                      <h3>Reps:{detail.reps}</h3>
+                                      <h1>Exercise Name: {item.exercise_name}</h1>
+                                      {sessionDetails.map((detail, i) => {
+                                            return (
+                                                <>
+                                                <TextField > Set Number: {detail.set_number}</TextField>
+                                                    
+                                                </>
+                                            )
+                                      })}
+
+
+                                      {/* <h2>Set Number:</h2>
+                                      <h3>Reps:</h3> */}
                               </CardContent>
                           </Card>
                         </Paper>
@@ -214,14 +225,7 @@ function DayPage() {
             )}
         </ul>
 
-        <ul>
-            {session.map((thing, i) =>
-                <>
-                <li key={i}>This is the session date:{thing.session_date}</li>
-                {/* //<li>These are the reps{detail.reps}</li> */}
-                </>
-            )}
-        </ul>
+        
             
             
             

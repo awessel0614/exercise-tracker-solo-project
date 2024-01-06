@@ -70,8 +70,12 @@ const router = express.Router();
 router.get('/', (req, res) => {
   console.log("in sessionRouter GET");
   const queryText =
-  
-    `SELECT * FROM "session" WHERE session_date = '2024-01-28';`
+  `
+  SELECT DISTINCT "exercise_id", "exercise_name", "session"."id", "session_date" FROM "session_details"
+  JOIN "exercise" on "exercise"."id" = "session_details"."exercise_id"
+  JOIN "session" on "session"."id" = "session_details"."session_id"
+  WHERE "session_details"."session_id" = 25;
+  `
     
     pool.query(queryText).then((result) => {
     res.send(result.rows);
