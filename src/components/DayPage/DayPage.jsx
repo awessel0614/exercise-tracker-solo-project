@@ -114,6 +114,7 @@ import './DayPage.css';
 
 
 function DayPage() {
+    var moment = require('moment');
     const dispatch = useDispatch();
     let history = useHistory();
     const sessionDetails = useSelector(store => store.sessionDetails)
@@ -156,9 +157,15 @@ function DayPage() {
         history.push('/form');
 
     }
+
+
+    const formattedDate = moment(session[0].session_date).format("dddd, l"); 
+    console.log(formattedDate);
+
+
     return (
         <>
-            <h1> {session[0].session_date}</h1>
+            <h1> {formattedDate}</h1>
             <Button
                 variant="contained"
                 onClick={goToExerciseForm}
