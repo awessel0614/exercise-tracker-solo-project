@@ -212,6 +212,7 @@ function AddExerciseForm() {
                 alert('Something went wrong!')
             })
         }
+
     
         useEffect(() => {
             getExercises();

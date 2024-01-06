@@ -100,7 +100,7 @@ function CalendarPage() {
         dispatch({ type: 'SEND_SESSION_TO_SERVER', payload: chosenDate})
         setChosenDate('');
         
-        //history.push('/day');
+        history.push('/day');
     }
 
     return (
@@ -113,11 +113,10 @@ function CalendarPage() {
                     selected={chosenDate}
                     onChange={handleDateChange}
                     dateFormat={'YYYY/mm/dd'}
-                    //dateFormat={'MM/dd/yyyy'}
                 />
             </LocalizationProvider>
 
-            {/* <p>here's the day : {chosenDate.d}</p> */}
+            <p>here's the day : {chosenDate}</p>
             <Button 
                 variant="contained"
                 onClick={goToDayPage}
