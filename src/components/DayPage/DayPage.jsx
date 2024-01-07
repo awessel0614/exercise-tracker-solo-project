@@ -120,23 +120,40 @@ function DayPage() {
     const sessionDetails = useSelector(store => store.sessionDetails)
     const session = useSelector(store => store.session)
 
+    const sessionidtest = useSelector((state) => state)
+    console.log("*********",sessionidtest);
+
+    const getSessionID = () => {
+        console.log("####getSessionId", session);
+        axios.get('/api/sessionID').then((response) => {
+        }).catch((error) => {
+            console.log('Error in getting session', error);
+            alert('Something went wrong!');
+        })
+
+    }
 
     const getSession = () => {
         axios.get('/api/session').then((response) => {
             console.log("this is the response.data in getSession function", response.data)
             const action = { type: 'FETCH_SESSION', payload: response.data};
             dispatch(action);
+            console.log("BREEEEEEEEEEE", session)
+            getSessionDetails()
         }).catch((error) => {
             console.log('Error in getting session', error);
             alert('Something went wrong!');
         })
+
     }
 
 
-    const getSessionDetails = () => {
+    function getSessionDetails() {
+        console.log("WE ARE IN getSessionDetails function n the day page");
             const action = { type: 'FETCH_SESSION_DETAILS'};
             dispatch(action);
     }
+    
 
 // ^^ i think i need to restructure this somehow... right now it's getting the session details for the entire day
 // but i'm finding it difficult to map over that correctly
@@ -146,6 +163,7 @@ function DayPage() {
 
 
     useEffect(() => {
+        getSessionID();
         getSession();
         getSessionDetails();
     }, []);
@@ -159,19 +177,21 @@ function DayPage() {
     }
 
 
-    const formattedDate = moment(session[0].session_date).format("dddd, l"); 
-    console.log(formattedDate);
+    // const formattedDate = moment(session[0].session_date).format("dddd, l"); 
+    // console.log(formattedDate);
 
 
     return (
         <>
-            <h1> {formattedDate}</h1>
+            {/* <h1> {formattedDate}</h1> */}
+
+
             <Button
                 variant="contained"
                 onClick={goToExerciseForm}
                 >Add Exercise</Button>
-
-                
+            
+            
             <Grid container sx={{justifyContent: "center"}}>
             {session.map(item => {
                 return (

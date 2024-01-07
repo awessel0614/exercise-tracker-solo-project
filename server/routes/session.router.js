@@ -88,28 +88,63 @@ router.get('/', (req, res) => {
 
 
 
+
+
+
+
 /**
  * POST route template
  */
+// router.post('/', (req, res) => {
+//   console.log('in POST for session router')
+//   console.log(req.body)
+
+//   const insertSessionQuery = `
+//         INSERT INTO "session"
+//         ("session_date", "user_id")
+//         VALUES
+//         ($1, $2);
+//   `;
+
+//   const insertSessionValues = [req.body, req.user.id];
+//   pool.query(insertSessionQuery, insertSessionValues)
+//     .then(() => {res.sendStatus(201);})
+//     .catch((err) => {
+//         console.log('Error in POST session', err);
+//         res.sendStatus(500);
+//     });
+// });
+
+// module.exports = router;
+
+
+// ^^ this works, however i'm gonna try a version where i return the ID
+// of the row that was just created
+
+
+
+
+
 router.post('/', (req, res) => {
-  console.log('in POST for session router')
-  console.log(req.body)
-
-  const insertSessionQuery = `
-        INSERT INTO "session"
-        ("session_date", "user_id")
-        VALUES
-        ($1, $2);
-  `;
-
-  const insertSessionValues = [req.body, req.user.id];
-  pool.query(insertSessionQuery, insertSessionValues)
-    .then(() => {res.sendStatus(201);})
-    .catch((err) => {
-        console.log('Error in POST session', err);
-        res.sendStatus(500);
-    });
-});
-
-module.exports = router;
+    console.log('in POST for session router')
+    console.log(req.body)
+  
+    const insertSessionQuery = `
+          INSERT INTO "session"
+          ("session_date", "user_id")
+          VALUES
+          ($1, $2)
+          RETURNING "id";
+    `;
+  
+    const insertSessionValues = [req.body, req.user.id];
+    pool.query(insertSessionQuery, insertSessionValues)
+      .then(() => {res.sendStatus(201);})
+      .catch((err) => {
+          console.log('Error in POST session', err);
+          res.sendStatus(500);
+      });
+  });
+  
+  module.exports = router;
 

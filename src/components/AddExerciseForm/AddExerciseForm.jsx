@@ -244,7 +244,7 @@ function AddExerciseForm() {
             const values = [...formFields];
             values[index][event.target.name] = event.target.value;
             setFormFields(values);
-            console.log('these are the values:', formFields )
+            //console.log('these are the values:', formFields )
          };
 
 
@@ -262,7 +262,7 @@ function AddExerciseForm() {
 
         const handleSubmit = (event) => {
             event.preventDefault();
-            console.log("here are the form fields", selectedExercise)
+            console.log("here is the selected exercise", selectedExercise)
             dispatch({ type: 'SEND_SESSION_DETAILS_TO_SERVER', payload: {selectedExercise, formFields} });
             setSelectedExercise([{exercise_id: '', set_number: '', reps: ''}]);
 
