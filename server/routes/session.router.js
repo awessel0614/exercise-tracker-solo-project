@@ -68,7 +68,7 @@ const router = express.Router();
 
 /**GET route template for singular day -- IT'S HARDCODED RIGHT NOW, need to fix that*/  
 router.get('/', (req, res) => {
-  console.log("in sessionRouter GET");
+  console.log("GET for session router");
   const queryText =
   `
   SELECT DISTINCT "exercise_id", "exercise_name", "session"."id", "session_date" FROM "session_details"
@@ -92,7 +92,7 @@ router.get('/', (req, res) => {
  * POST route template
  */
 router.post('/', (req, res) => {
-  console.log('in POST for session router')
+  console.log('POST for session router')
   console.log(req.body)
 
   const insertSessionQuery = `

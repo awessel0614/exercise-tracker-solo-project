@@ -117,26 +117,37 @@ function DayPage() {
     var moment = require('moment');
     const dispatch = useDispatch();
     let history = useHistory();
-    const sessionDetails = useSelector(store => store.sessionDetails)
+    //const sessionDetails = useSelector(store => store.sessionDetails)
     const session = useSelector(store => store.session)
 
 
-    const getSession = () => {
+
+    const getDayID = () => {
         axios.get('/api/session').then((response) => {
-            console.log("this is the response.data in getSession function", response.data)
-            const action = { type: 'FETCH_SESSION', payload: response.data};
-            dispatch(action);
-        }).catch((error) => {
-            console.log('Error in getting session', error);
-            alert('Something went wrong!');
+            
         })
     }
 
 
-    const getSessionDetails = () => {
-            const action = { type: 'FETCH_SESSION_DETAILS'};
-            dispatch(action);
-    }
+
+
+    // const getSession = () => {
+    //     axios.get('/api/session').then((response) => {
+    //         console.log("this is the response.data in getSession function", response.data)
+    //         const action = { type: 'FETCH_SESSION', payload: response.data};
+    //         dispatch(action);
+    //     }).catch((error) => {
+    //         console.log('Error in getting session', error);
+    //         alert('Something went wrong!');
+    //     })
+    // }
+
+
+    // const getSessionDetails = () => {
+    //         const action = { type: 'FETCH_SESSION_DETAILS'};
+    //         dispatch(action);
+    // }
+    //^^works, just commenting out for testing
 
 // ^^ i think i need to restructure this somehow... right now it's getting the session details for the entire day
 // but i'm finding it difficult to map over that correctly
@@ -147,7 +158,7 @@ function DayPage() {
 
     useEffect(() => {
         getSession();
-        getSessionDetails();
+        //getSessionDetails();
     }, []);
 
 
@@ -159,13 +170,13 @@ function DayPage() {
     }
 
 
-    const formattedDate = moment(session[0].session_date).format("dddd, l"); 
-    console.log(formattedDate);
+    // const formattedDate = moment(session[0].session_date).format("dddd, l"); 
+    // console.log(formattedDate);
 
 
     return (
         <>
-            <h1> {formattedDate}</h1>
+            {/* <h1> {formattedDate}</h1> */}
             <Button
                 variant="contained"
                 onClick={goToExerciseForm}
@@ -187,20 +198,20 @@ function DayPage() {
                               
                             key = {item.id}
                           >
-                              {/* <CardContent>
+                              <CardContent>
                                       <h2>Exercise: {item.exercise_name}</h2>
-                                      {sessionDetails.map((detail, i) => {
+                                      {/* {sessionDetails.map((detail, i) => {
                                             return (
                                                 <>
                                                 <p> Set Number: {detail.set_number} </p>
                                                 </>
                                             )
-                                      })}
-                              </CardContent> */}
+                                      })} */}
+                              </CardContent>
 
 
 
-                              <CardContent>
+                              {/* <CardContent>
                                       <h2>Exercise: {item.exercise_name}</h2>
                                       {sessionDetails.map((detail, i) => {
                                             return (
@@ -210,7 +221,7 @@ function DayPage() {
                                                 </>
                                             )
                                       })}
-                              </CardContent>
+                              </CardContent> */}
                           </Card>
                         </Paper>
                       </Grid> 
@@ -220,11 +231,11 @@ function DayPage() {
         </Grid>
 
         <ul>
-            {sessionDetails.map((detail, i) =>
+            {/* {sessionDetails.map((detail, i) =>
                 <>
                 <li key={i}>Set Number: {detail.set_number} Reps: {detail.reps} </li>
                 </>
-            )}
+            )} */}
         </ul>
 
         
