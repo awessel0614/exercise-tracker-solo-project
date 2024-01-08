@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
         console.log("this is result.rows:", result.rows)
 
         //add a funtion to check rows
-        res.send(result.rows);
+        res.send(result.rows.length > 0 ? result.rows[0] : {});
     }).catch((error) => {
       console.log('Error in GET /api/session', error);
       res.sendStatus(500);

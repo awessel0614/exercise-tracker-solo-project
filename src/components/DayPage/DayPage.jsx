@@ -114,7 +114,7 @@ import './DayPage.css';
 
 
 function DayPage() {
-    var moment = require('moment');
+    //var moment = require('moment');
     const dispatch = useDispatch();
     let history = useHistory();
     //const sessionDetails = useSelector(store => store.sessionDetails)
@@ -130,6 +130,12 @@ function DayPage() {
     }
 
 
+    const getSession = () => {
+        const newID = dayID[0];
+        console.log("NEW ID I HOPE", newID)
+        console.log("in getSession function on DayPage")
+        dispatch({ type: 'FETCH_SESSION', payload: newID });
+    }
 
 
     // const getSession = () => {
@@ -180,7 +186,7 @@ function DayPage() {
 
     return (
         <>
-            {dayID[0].id}
+            <h2>{dayID.id}</h2>
             {/* <h1> {formattedDate}</h1> */}
             <Button
                 variant="contained"

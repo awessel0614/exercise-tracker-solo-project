@@ -1,7 +1,7 @@
 
 
 
-const dayIDReducer = (state = [], action) => {
+const dayIDReducer = (state = {}, action) => {
     if (action.type === 'SET_DAYID') {
         console.log("dayIDReducer action.payload is:", action.payload);
         return action.payload;
