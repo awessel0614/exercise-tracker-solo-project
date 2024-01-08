@@ -5,7 +5,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 function* fetchDayID() {
     try{
-        const response = yield axios.get('/api/session');
+        const response = yield axios.get('/api/day');
         const action = { type: 'SET_DAYID', payload: response.data }
         yield put(action);
     } catch (error) {

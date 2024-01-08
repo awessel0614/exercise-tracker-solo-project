@@ -119,13 +119,14 @@ function DayPage() {
     let history = useHistory();
     //const sessionDetails = useSelector(store => store.sessionDetails)
     const session = useSelector(store => store.session)
+    const dayID = useSelector(store => store.dayID)
 
 
 
     const getDayID = () => {
-        axios.get('/api/session').then((response) => {
-            
-        })
+        console.log("in getDayID function on DayPage");
+
+        dispatch({ type: 'FETCH_DAYID'});
     }
 
 
@@ -157,7 +158,8 @@ function DayPage() {
 
 
     useEffect(() => {
-        getSession();
+        getDayID();
+        //getSession();
         //getSessionDetails();
     }, []);
 
@@ -170,12 +172,15 @@ function DayPage() {
     }
 
 
+
+
     // const formattedDate = moment(session[0].session_date).format("dddd, l"); 
     // console.log(formattedDate);
 
 
     return (
         <>
+            {dayID[0].id}
             {/* <h1> {formattedDate}</h1> */}
             <Button
                 variant="contained"
