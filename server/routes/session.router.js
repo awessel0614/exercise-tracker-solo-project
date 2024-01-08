@@ -74,7 +74,7 @@ router.get('/', (req, res) => {
   SELECT DISTINCT "exercise_id", "exercise_name", "session"."id", "session_date" FROM "session_details"
   JOIN "exercise" on "exercise"."id" = "session_details"."exercise_id"
   JOIN "session" on "session"."id" = "session_details"."session_id"
-  WHERE "session_details"."session_id" = 25;
+  WHERE "session_details"."session_id" = $1;
   `
     
     pool.query(queryText).then((result) => {
