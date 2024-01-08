@@ -3,11 +3,11 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 
 
-function* fetchDayID() {
+function* fetchDayID(action) {
     try{
+        console.log("here's the action in the fetchDayID", action);
         const response = yield axios.get('/api/day');
-        const action = { type: 'SET_DAYID', payload: response.data }
-        yield put(action);
+        yield put({ type: 'SET_DAYID', payload: response.data });
     } catch (error) {
         console.log('Error in fetching dayID', error)
         alert('Something went wrong!');

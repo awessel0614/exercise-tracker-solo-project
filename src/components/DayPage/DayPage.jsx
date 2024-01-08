@@ -121,7 +121,7 @@ function DayPage() {
     const session = useSelector(store => store.session)
     const dayID = useSelector(store => store.dayID)
 
-
+   const [theID, setTheID] = useState(4);
 
     const getDayID = () => {
         console.log("in getDayID function on DayPage");
@@ -129,14 +129,27 @@ function DayPage() {
         dispatch({ type: 'FETCH_DAYID'});
     }
 
-
     const getSession = () => {
-        const newID = dayID[0];
+        const newID = dayID;
         console.log("NEW ID I HOPE", newID)
         console.log("in getSession function on DayPage")
         dispatch({ type: 'FETCH_SESSION', payload: newID });
     }
 
+
+    // const getSessionDetails = () => {
+    //         const action = { type: 'FETCH_SESSION_DETAILS'};
+    //         dispatch(action);
+    // }
+    //^^works, just commenting out for testing
+
+
+     
+    // const setID = (day) => {
+    //     setTheID(day);
+    //     console.log("PLEASE WORK", theID);
+    // }
+    //^^ something that I tried, didn't work
 
     // const getSession = () => {
     //     axios.get('/api/session').then((response) => {
@@ -150,11 +163,7 @@ function DayPage() {
     // }
 
 
-    // const getSessionDetails = () => {
-    //         const action = { type: 'FETCH_SESSION_DETAILS'};
-    //         dispatch(action);
-    // }
-    //^^works, just commenting out for testing
+    
 
 // ^^ i think i need to restructure this somehow... right now it's getting the session details for the entire day
 // but i'm finding it difficult to map over that correctly
@@ -164,8 +173,13 @@ function DayPage() {
 
 
     useEffect(() => {
+        // setID(dayID.id);    << something i tried with the setID function, didn't work
         getDayID();
-        //getSession();
+        if (dayID.id !== undefined) {
+            setTheID(dayID.id);
+            getSession();
+        }
+        
         //getSessionDetails();
     }, []);
 
