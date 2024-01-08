@@ -121,6 +121,10 @@ function DayPage() {
     const session = useSelector(store => store.session)
 
 
+
+
+
+    
     const getSession = () => {
         axios.get('/api/session').then((response) => {
             console.log("this is the response.data in getSession function", response.data)
