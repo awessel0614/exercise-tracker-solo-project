@@ -129,7 +129,7 @@ router.post('/', async (req, res) => {
         `;
         for(let exercise of req.body.formFields) {
             //inserts X rows of these details (it's a dynamic amount, based on the user)
-            await db.query(queryText, [req.body.selectedExercise.exercise_id, sessionId, exercise.set_number, exercise.reps]);
+            await db.query(queryText, [req.body.selectedExercise.exercise_id, req.body.selectedExercise.session_id, exercise.set_number, exercise.reps]);
         }
         await db.query('COMMIT');
         res.sendStatus(201);
