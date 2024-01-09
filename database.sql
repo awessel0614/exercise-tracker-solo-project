@@ -39,3 +39,17 @@ INSERT INTO "exercise"
 	("exercise_name")
 	VALUES
 	('Squat'), ('Sumo Squat'), ('Deadlift'), ('Romanian Deadlift'), ('Bicep Curls');
+
+
+
+INSERT INTO "session_details" ("session_id", "exercise_id", "set_number", "reps", "weight") 
+VALUES (
+	
+	('25', '3', '1', '10', '100'),
+	('25', '3', '2', '20', '200'),
+	('25', '3', '3', '30', '300'),
+	('25', '2', '4', '40', '400'),
+	('25', '2', '5', '50', '500'),
+	('25', '1', '6', '60', '600'),
+	
+	);

@@ -66,9 +66,9 @@ const router = express.Router();
 
 
 
-/**GET route template for singular day -- IT'S HARDCODED RIGHT NOW, need to fix that*/  
+/**GET route template for singular day*/  
 router.get('/', (req, res) => {
-  console.log("GET for session router", req.body);
+  console.log("GET for session router, here's the req.params:", req.params);
   const queryText =
   `
   SELECT DISTINCT "exercise_id", "exercise_name", "session"."id", "session_date" FROM "session_details"
@@ -77,14 +77,13 @@ router.get('/', (req, res) => {
   WHERE "session_details"."session_id" = $1;
   `
     
-    pool.query(queryText, [req.body]).then((result) => {
+    pool.query(queryText, [req.params]).then((result) => {
     res.send(result.rows);
   }).catch((error) => {
     console.log('Error in GET /api/session', error);
     res.sendStatus(500);
   });
 });
-
 
 
 

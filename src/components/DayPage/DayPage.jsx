@@ -120,8 +120,10 @@ function DayPage() {
     //const sessionDetails = useSelector(store => store.sessionDetails)
     const session = useSelector(store => store.session)
     const dayID = useSelector(store => store.dayID)
+    const [theID, setTheID] = useState(4);
+    console.log("this is theID value:", dayID.id);
 
-   const [theID, setTheID] = useState(4);
+
 
     const getDayID = () => {
         console.log("in getDayID function on DayPage");
@@ -130,19 +132,26 @@ function DayPage() {
     }
 
     const getSession = () => {
-        const newID = dayID;
-        console.log("NEW ID I HOPE", newID)
+        
+        console.log("theID VALUE:", dayID.id)
         console.log("in getSession function on DayPage")
-        dispatch({ type: 'FETCH_SESSION', payload: newID });
+        dispatch({ type: 'FETCH_SESSION', payload: dayID.id });
     }
 
 
+    // const getSession = () => {
+    //     const newID = dayID;
+    //     console.log("NEW ID I HOPE", newID)
+    //     console.log("in getSession function on DayPage")
+    //     dispatch({ type: 'FETCH_SESSION', payload: newID });
+    // }
+
+    
     // const getSessionDetails = () => {
     //         const action = { type: 'FETCH_SESSION_DETAILS'};
     //         dispatch(action);
     // }
     //^^works, just commenting out for testing
-
 
      
     // const setID = (day) => {
@@ -150,6 +159,7 @@ function DayPage() {
     //     console.log("PLEASE WORK", theID);
     // }
     //^^ something that I tried, didn't work
+
 
     // const getSession = () => {
     //     axios.get('/api/session').then((response) => {
@@ -162,35 +172,28 @@ function DayPage() {
     //     })
     // }
 
-
-    
-
 // ^^ i think i need to restructure this somehow... right now it's getting the session details for the entire day
 // but i'm finding it difficult to map over that correctly
 // maybe i need to do an async GET that gets the sets and reps for a particular exercise on that particular day?
 // OR maybe i'll just create a "view details" button on each exercise that, when I click it, grabs the 
 // exercise_ID of the
 
+const goToExerciseForm = (event) => {
+    event.preventDefault();
+    console.log("going to add exercise form");
+    history.push('/form');
 
-    useEffect(() => {
+}
+    
+useEffect(() => {
         // setID(dayID.id);    << something i tried with the setID function, didn't work
         getDayID();
         if (dayID.id !== undefined) {
             setTheID(dayID.id);
             getSession();
         }
-        
         //getSessionDetails();
-    }, []);
-
-
-    const goToExerciseForm = (event) => {
-        event.preventDefault();
-        console.log("going to add exercise form");
-        history.push('/form');
-
-    }
-
+    }, [theID]);
 
 
 
@@ -200,6 +203,7 @@ function DayPage() {
 
     return (
         <>
+            {/* <h2>{dayID.id}</h2> */}
             <h2>{dayID.id}</h2>
             {/* <h1> {formattedDate}</h1> */}
             <Button
