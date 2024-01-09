@@ -120,16 +120,8 @@ function DayPage() {
     //const sessionDetails = useSelector(store => store.sessionDetails)
     const session = useSelector(store => store.session)
     const dayID = useSelector(store => store.dayID)
-    const [theID, setTheID] = useState(4);
-    console.log("this is theID value:", dayID.id);
+   
 
-
-
-    const getDayID = () => {
-        console.log("in getDayID function on DayPage");
-
-        dispatch({ type: 'FETCH_DAYID'});
-    }
 
     const getSession = () => {
         
@@ -147,10 +139,12 @@ function DayPage() {
     // }
 
     
-    // const getSessionDetails = () => {
-    //         const action = { type: 'FETCH_SESSION_DETAILS'};
-    //         dispatch(action);
-    // }
+    const getSessionDetails = () => {
+        if(dayID && dayID.id){
+            const action = { type: 'FETCH_SESSION_DETAILS', payload: dayID.id};
+            dispatch(action);
+        }
+    }
     //^^works, just commenting out for testing
 
      
@@ -187,13 +181,10 @@ const goToExerciseForm = (event) => {
     
 useEffect(() => {
         // setID(dayID.id);    << something i tried with the setID function, didn't work
-        getDayID();
-        if (dayID.id !== undefined) {
-            setTheID(dayID.id);
-            getSession();
-        }
-        //getSessionDetails();
-    }, [theID]);
+        //getDayID();
+        getSession();
+        getSessionDetails();
+    }, [dayID]);
 
 
 

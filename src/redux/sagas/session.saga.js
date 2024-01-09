@@ -20,7 +20,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 function* fetchSession(action) {
     try{
         console.log("fetchSession saga action.payload is:", action.payload)
-        const response = yield axios.get('/api/session', action.payload);
+        const response = yield axios.get(`/api/session/${action.payload}`);
         yield put({ type: 'SET_SESSION', payload: response.data });
     } catch (error) {
         console.log('Error in fetching session', error)
@@ -31,7 +31,9 @@ function* fetchSession(action) {
 
 function* sendSessionToServer(action) {
     try{
-        yield axios.post('/api/session', action.payload);
+        let response = yield axios.post('/api/session', action.payload);
+        yield put({ type: 'SET_DAYID', payload: response.data });
+        //yield put ({})
         //yield put({ type: 'FETCH_SESSION'})
     } catch (error) {
         alert('Something went wront!');
