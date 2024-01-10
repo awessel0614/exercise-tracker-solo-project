@@ -15,8 +15,7 @@ const router = express.Router();
 // });
 
 
-//GET for singular session details -- HARDCODED, need to fix that... session ID will need
-//to be variable
+//GET for singular session details 
 router.get('/:id', (req, res) => {
     console.log("in sessionDetailrouter GET", req.params.id)
     pool.query(

@@ -101,6 +101,7 @@ function CalendarPage() {
         setChosenDate('');
         
         history.push('/day');
+       
     }
 
     return (
