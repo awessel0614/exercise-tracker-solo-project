@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { TextField, Button, Grid, Container, Card, CardContent, Paper } from "@mui/material";
+import { TextField, Button, Grid, Container, CardActions, Card, CardContent, Paper } from "@mui/material";
 import './DayPage.css';
 
 
@@ -10,7 +10,7 @@ function DayPage() {
     //var moment = require('moment');
     const dispatch = useDispatch();
     let history = useHistory();
-    //const sessionDetails = useSelector(store => store.sessionDetails)
+    const sessionDetails = useSelector(store => store.sessionDetails)
     const session = useSelector(store => store.session)
     const dayID = useSelector(store => store.dayID)
    
@@ -26,13 +26,19 @@ function DayPage() {
     }
 
     
-    const getSessionDetails = () => {
-        if(dayID && dayID.id){
-            const action = { type: 'FETCH_SESSION_DETAILS', payload: dayID.id};
-            dispatch(action);
-        }
-    }
+    // const getSessionDetails = () => {
+    //     if(dayID && dayID.id){
+    //         const action = { type: 'FETCH_SESSION_DETAILS', payload: dayID.id};
+    //         dispatch(action);
+    //     }
+    // }
     //^^works, just commenting out for testing
+
+
+    const getSessionDetails = (id) => {
+        console.log("in getSessionDetails function on DayPage");
+        dispatch({ type: 'FETCH_SESSION_DETAILS', payload: {id} });
+    }
 
      
 
@@ -80,40 +86,43 @@ useEffect(() => {
                     <>
                       <Grid margin = {'15px'}>
                         <Paper elevation={8}>
-                          <Card 
-                            style = 
-                            {{ height: '600px', 
-                            width: '225px', 
-                            paddingBottom:'30px', 
-                            backgroundColor: "lightblue"}} 
-                              
-                            key = {item.id}
-                          >
-                              <CardContent>
-                                      <h2>Exercise: {item.exercise_name}</h2>
-                                      {/* {sessionDetails.map((detail, i) => {
-                                            return (
-                                                <>
-                                                <p> Set Number: {detail.set_number} </p>
-                                                </>
-                                            )
-                                      })} */}
-                              </CardContent>
+                          {/* <CardActions onClick = {() => getSessionDetails(item.exercise_id)} > */}
+                            <Card 
+                                style = 
+                                {{ height: '600px', 
+                                width: '225px', 
+                                paddingBottom:'30px', 
+                                backgroundColor: "lightblue"}} 
+                                onClick = {() => getSessionDetails()}
+                                key = {item.id}
+                                >
+                                <CardContent>
+                                        <p>Exercise ID: {item.exercise_id}</p> 
+                                        <h2>Exercise: {item.exercise_name}</h2>
+                                        {/* {sessionDetails.map((detail, i) => {
+                                                return (
+                                                    <>
+                                                    <p> Set Number: {detail.set_number} </p>
+                                                    </>
+                                                )
+                                        })} */}
+                                </CardContent>
 
 
 
-                              {/* <CardContent>
-                                      <h2>Exercise: {item.exercise_name}</h2>
-                                      {sessionDetails.map((detail, i) => {
-                                            return (
-                                                <>
-                                                <p> Set: {detail.set_number} </p>
-                                                <p> Reps: {detail.reps}</p>
-                                                </>
-                                            )
-                                      })}
-                              </CardContent> */}
-                          </Card>
+                                {/* <CardContent>
+                                        <h2>Exercise: {item.exercise_name}</h2>
+                                        {sessionDetails.map((detail, i) => {
+                                                return (
+                                                    <>
+                                                    <p> Set: {detail.set_number} </p>
+                                                    <p> Reps: {detail.reps}</p>
+                                                    </>
+                                                )
+                                        })}
+                                </CardContent> */}
+                            </Card>
+                          {/* </CardActions> */}
                         </Paper>
                       </Grid> 
                     </>

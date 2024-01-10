@@ -16,8 +16,27 @@ const router = express.Router();
 
 
 //GET for singular session details 
-router.get('/:id', (req, res) => {
-    console.log("in sessionDetailrouter GET", req.params.id)
+// router.get('/:id', (req, res) => {
+//     console.log("in sessionDetailrouter GET", req.params.id)
+//     pool.query(
+//         `SELECT * FROM "session_details"
+//         JOIN "exercise" on "exercise"."id" = "session_details"."exercise_id"
+//         JOIN "session" on "session"."id" = "session_details"."session_id"
+//         WHERE "session_id" = $1;`,
+//         [req.params.id]
+//     ).then((result) => {
+//       res.send(result.rows);
+//     }).catch((error) => {
+//       console.log('Error in GET /api/sessionDetail', error);
+//       res.sendStatus(500);
+//     }); 
+//   });
+// what i originally had on 10/10, commenting out to test my new one eeeee
+
+
+
+  router.get('/:id', (req, res) => {
+    console.log("in sessionDetailrouter GET", req.params)
     pool.query(
         `SELECT * FROM "session_details"
         JOIN "exercise" on "exercise"."id" = "session_details"."exercise_id"

@@ -25,6 +25,11 @@ router.get('/:id', (req, res) => {
 
 
 
+
+
+
+
+
 /**POST route, sends back ID of already created or newly created day*/
 router.post('/', async (req, res) => {
   console.log('POST for session router')
