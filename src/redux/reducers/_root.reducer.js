@@ -4,6 +4,7 @@ import user from './user.reducer';
 import exercises from './exercises.reducer';
 import sessionDetails from './sessionDetails.reducer';
 import session from './session.reducer';
+import dayID from './dayID.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   exercises,
   sessionDetails,
   session,
+  dayID,
 });
 
 export default rootReducer;
