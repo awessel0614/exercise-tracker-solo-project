@@ -198,6 +198,10 @@ import './AddExerciseForm.css';
 
 
 function AddExerciseForm() {
+    const session = useSelector(store => store.session)
+    const dayID = useSelector(store => store.dayID)
+
+
 
         let history = useHistory();
 
@@ -219,7 +223,7 @@ function AddExerciseForm() {
         }, []);
 
         const [selectedExercise, setSelectedExercise] = useState({
-            //session_id: '',
+            session_id: dayID.id,
             exercise_id: 'test',
            
         });
@@ -279,6 +283,7 @@ function AddExerciseForm() {
 
     return (
         <>
+        <h2>Here's the day id:{dayID.id}</h2>
         <h1>Enter Exercise Info:</h1>
 
         <Box sx={{ minWidth: 120 }}>

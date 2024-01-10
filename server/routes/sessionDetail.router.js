@@ -15,16 +15,16 @@ const router = express.Router();
 // });
 
 
-//GET for singular session details -- HARDCODED, need to fix that... session ID will need
-//to be variable
-router.get('/', (req, res) => {
-    console.log("in sessionDetailrouter GET")
+//GET for singular session details 
+router.get('/:id', (req, res) => {
+    console.log("in sessionDetailrouter GET", req.params.id)
     pool.query(
         `SELECT * FROM "session_details"
         JOIN "exercise" on "exercise"."id" = "session_details"."exercise_id"
         JOIN "session" on "session"."id" = "session_details"."session_id"
-        WHERE "session_id" = 25;`
-        ).then((result) => {
+        WHERE "session_id" = $1;`,
+        [req.params.id]
+    ).then((result) => {
       res.send(result.rows);
     }).catch((error) => {
       console.log('Error in GET /api/sessionDetail', error);
@@ -115,20 +115,20 @@ router.post('/', async (req, res) => {
     try {
         await db.query('BEGIN');
         //Creates a new session
-        let queryText = `
-            INSERT INTO "session" ("user_id")
-            VALUES ($1) RETURNING "id";
-        `;
-        const result = await db.query(queryText, [req.user.id]);
-        const sessionId = result.rows[0].id;
+        // let queryText = `
+        //     INSERT INTO "session" ("user_id")
+        //     VALUES ($1) RETURNING "id";
+        // `;
+        // const result = await db.query(queryText, [req.user.id]);
+        // const sessionId = result.rows[0].id;
         
-        queryText = `
+        let queryText = `
             INSERT INTO "session_details" ("exercise_id", "session_id", "set_number", "reps")
             VALUES ($1, $2, $3, $4);
         `;
         for(let exercise of req.body.formFields) {
             //inserts X rows of these details (it's a dynamic amount, based on the user)
-            await db.query(queryText, [req.body.selectedExercise.exercise_id, sessionId, exercise.set_number, exercise.reps]);
+            await db.query(queryText, [req.body.selectedExercise.exercise_id, req.body.selectedExercise.session_id, exercise.set_number, exercise.reps]);
         }
         await db.query('COMMIT');
         res.sendStatus(201);
