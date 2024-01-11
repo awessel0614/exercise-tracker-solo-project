@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { TextField, Button, Grid, Container, CardActions, Card, CardContent, Paper } from "@mui/material";
+import { TextField, Button, Grid, Container, CardActions, Card, CardContent, Paper, Box } from "@mui/material";
 import './DayPage.css';
+
 
 
 function DayPage() {
@@ -15,8 +16,6 @@ function DayPage() {
     const dayID = useSelector(store => store.dayID)
    
 
-
-
     
     const getSession = () => {
         
@@ -25,22 +24,12 @@ function DayPage() {
         dispatch({ type: 'FETCH_SESSION', payload: dayID.id });
     }
 
-    
-    // const getSessionDetails = () => {
-    //     if(dayID && dayID.id){
-    //         const action = { type: 'FETCH_SESSION_DETAILS', payload: dayID.id};
-    //         dispatch(action);
-    //     }
-    // }
-    //^^works, just commenting out for testing
-
-
     const getSessionDetails = (id) => {
         console.log("in getSessionDetails function on DayPage");
-        dispatch({ type: 'FETCH_SESSION_DETAILS', payload: {id} });
+        console.log("!!!!!!!!", id);
+        console.log("!!!!!!!!", dayID.id);
+        dispatch({ type: 'FETCH_SESSION_DETAILS', payload: {id: id, theDayID: dayID.id} });
     }
-
-     
 
     const goToExerciseForm = (event) => {
         event.preventDefault();
@@ -59,6 +48,7 @@ useEffect(() => {
         getSession();
         //getSessionDetails();
     }, [dayID]);
+
 
 
 
@@ -82,6 +72,7 @@ useEffect(() => {
                 
             <Grid container sx={{justifyContent: "center"}}>
             {session.map(item => {
+                
                 return (
                     <>
                       <Grid margin = {'15px'}>
@@ -93,25 +84,18 @@ useEffect(() => {
                                 width: '225px', 
                                 paddingBottom:'30px', 
                                 backgroundColor: "lightblue"}} 
-                                onClick = {() => getSessionDetails()}
+                                onClick = {() => getSessionDetails(item.exercise_id)}
                                 key = {item.id}
                                 >
                                 <CardContent>
                                         <p>Exercise ID: {item.exercise_id}</p> 
                                         <h2>Exercise: {item.exercise_name}</h2>
-                                        {/* {sessionDetails.map((detail, i) => {
-                                                return (
-                                                    <>
-                                                    <p> Set Number: {detail.set_number} </p>
-                                                    </>
-                                                )
-                                        })} */}
+                                     
                                 </CardContent>
+                            
 
 
-
-                                {/* <CardContent>
-                                        <h2>Exercise: {item.exercise_name}</h2>
+                                <CardContent>
                                         {sessionDetails.map((detail, i) => {
                                                 return (
                                                     <>
@@ -120,7 +104,7 @@ useEffect(() => {
                                                     </>
                                                 )
                                         })}
-                                </CardContent> */}
+                                </CardContent>
                             </Card>
                           {/* </CardActions> */}
                         </Paper>
@@ -131,11 +115,11 @@ useEffect(() => {
         </Grid>
 
         <ul>
-            {/* {sessionDetails.map((detail, i) =>
+            {sessionDetails.map((detail, i) =>
                 <>
                 <li key={i}>Set Number: {detail.set_number} Reps: {detail.reps} </li>
                 </>
-            )} */}
+            )}
         </ul>
 
         

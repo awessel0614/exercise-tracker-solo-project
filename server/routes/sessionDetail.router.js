@@ -35,14 +35,34 @@ const router = express.Router();
 
 
 
-  router.get('/:id', (req, res) => {
-    console.log("in sessionDetailrouter GET", req.params)
+//   router.get('/:id', (req, res) => {
+//     console.log("in sessionDetailrouter GET, params is:", req.params + "req.body is:", req.body)
+//     pool.query(
+        
+//         `SELECT "set_number", "reps", "weight" FROM "session_details"
+//         WHERE "exercise_id" = $1 AND "session_id" = $2;`,
+
+//         [req.params.id]
+//     ).then((result) => {
+//       res.send(result.rows);
+//     }).catch((error) => {
+//       console.log('Error in GET /api/sessionDetail', error);
+//       res.sendStatus(500);
+//     }); 
+//   });
+// changing the /:id to something different for testing purposes
+
+
+
+
+  router.get('/details', (req, res) => {
+    console.log("in sessionDetailrouter GET, req.query is:", req.query)
     pool.query(
-        `SELECT * FROM "session_details"
-        JOIN "exercise" on "exercise"."id" = "session_details"."exercise_id"
-        JOIN "session" on "session"."id" = "session_details"."session_id"
-        WHERE "session_id" = $1;`,
-        [req.params.id]
+        
+        `SELECT "exercise_id", "set_number", "reps", "weight" FROM "session_details"
+        WHERE "exercise_id" = $1 AND "session_id" = $2;`,
+
+        [req.query.id, req.query.theDayID]
     ).then((result) => {
       res.send(result.rows);
     }).catch((error) => {
@@ -50,6 +70,7 @@ const router = express.Router();
       res.sendStatus(500);
     }); 
   });
+
 
 
    
