@@ -240,7 +240,7 @@ function AddExerciseForm() {
 
 
         const [formFields, setFormFields] = useState([
-            {set_number: '', reps: ''},
+            {set_number: '', reps: '', weight: ''},
         ]);
 
         const handleFormChange = (event, index) => { 
@@ -253,7 +253,7 @@ function AddExerciseForm() {
 
 
         const addSetRepRow = () => {
-            setFormFields([...formFields, { set_number: '', reps: ''}])
+            setFormFields([...formFields, { set_number: '', reps: '', weight: ''}])
         }
 
         const deleteSetRepRow = (index) => {
@@ -268,7 +268,7 @@ function AddExerciseForm() {
             event.preventDefault();
             console.log("here are the form fields", selectedExercise)
             dispatch({ type: 'SEND_SESSION_DETAILS_TO_SERVER', payload: {selectedExercise, formFields} });
-            setSelectedExercise([{exercise_id: '', set_number: '', reps: ''}]);
+            setSelectedExercise([{exercise_id: '', set_number: '', reps: '', weight: ''}]);
 
             history.push('/day');
         }
@@ -319,6 +319,13 @@ function AddExerciseForm() {
                                 variant="filled"
                                 onChange={event => handleFormChange(event, index)}
                                 value={form.reps}
+                            />
+                            <TextField 
+                                name="weight"
+                                placeholder="Weight i.e. 20"
+                                variant="filled"
+                                onChange={event => handleFormChange(event, index)}
+                                value={form.weight}
                             />
                             <br></br>
                             <Button 

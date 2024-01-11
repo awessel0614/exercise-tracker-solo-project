@@ -70,12 +70,12 @@ router.post('/', async (req, res) => {
         // const sessionId = result.rows[0].id;
         
         let queryText = `
-            INSERT INTO "session_details" ("exercise_id", "session_id", "set_number", "reps")
-            VALUES ($1, $2, $3, $4);
+            INSERT INTO "session_details" ("exercise_id", "session_id", "set_number", "reps", "weight")
+            VALUES ($1, $2, $3, $4, $5);
         `;
         for(let exercise of req.body.formFields) {
             //inserts X rows of these details (it's a dynamic amount, based on the user)
-            await db.query(queryText, [req.body.selectedExercise.exercise_id, req.body.selectedExercise.session_id, exercise.set_number, exercise.reps]);
+            await db.query(queryText, [req.body.selectedExercise.exercise_id, req.body.selectedExercise.session_id, exercise.set_number, exercise.reps, exercise.weight]);
         }
         await db.query('COMMIT');
         res.sendStatus(201);

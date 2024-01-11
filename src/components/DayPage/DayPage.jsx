@@ -94,6 +94,7 @@ useEffect(() => {
                                                 <>
                                                 <p> Set: {detail.set_number} </p>
                                                 <p> Reps: {detail.reps}</p>
+                                                <p> Weight: {detail.weight}</p>
                                                 </>
                                                 )
                                         })}
