@@ -203,6 +203,8 @@ function DayPage() {
 
     const deleteExercise = (id) => {
         console.log("in deleteExercise function on DayPage");
+        console.log("id is:", id);
+        console.log("dayID.id is:", dayID.id);
         dispatch({ type: 'DELETE_EXERCISE', payload: {id: id, theDayID: dayID.id} })
     }
 

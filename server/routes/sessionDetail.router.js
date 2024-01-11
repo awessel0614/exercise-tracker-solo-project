@@ -53,6 +53,23 @@ const router = express.Router();
   });
 
 
+//DELETE
+
+// router.delete('/deleteExercise', (req, res) => {
+//     console.log("in sessionDetailrouter DELETE, req.query is:", req.query)
+//     pool.query(
+        
+//         `DELETE FROM "session_details"
+//         WHERE "exercise_id" = $1 AND "session_id" = $2;`,
+
+//         [req.query.id, req.query.theDayID])
+//       .then(() => { res.sendStatus(200); })
+//       .catch((err) => {
+//         console.log('Error completing DELETE exercise', err);
+//         res.sendStatus(500);
+//       });
+//   });
+
 
    
 //POST
@@ -87,6 +104,9 @@ router.post('/', async (req, res) => {
         db.release();
     }
 });
+
+
+
 
 
 

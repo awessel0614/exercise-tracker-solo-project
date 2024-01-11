@@ -29,9 +29,23 @@ function* sendSessionDetailsToServer(action) {
 }
 
 
+// function* deleteExercise(action) {
+//     try{
+//         yield axios.delete('/api/sessionDetail/deleteExercise', action.payload);
+//         yield put({ type: 'FETCH_SESSION_DETAILS'})
+//     } catch (error) {
+//         alert('Something went wront!');
+//         console.error('Error in deleting exercise', error)
+//         throw error;
+//     }
+
+// }
+
+
 function* sessionDetailsSaga() {
     yield takeLatest('SEND_SESSION_DETAILS_TO_SERVER', sendSessionDetailsToServer);
     yield takeLatest('FETCH_SESSION_DETAILS', fetchSessionDetails);
+    // yield takeLatest('DELETE_EXERCISE', deleteExercise);
 }
 
 export default sessionDetailsSaga;
