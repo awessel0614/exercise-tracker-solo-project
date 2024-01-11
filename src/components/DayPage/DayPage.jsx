@@ -26,8 +26,8 @@ function DayPage() {
 
     const getSessionDetails = (id) => {
         console.log("in getSessionDetails function on DayPage");
-        console.log("!!!!!!!!", id);
-        console.log("!!!!!!!!", dayID.id);
+        console.log("id is:", id);
+        console.log("dayID.id is:", dayID.id);
         dispatch({ type: 'FETCH_SESSION_DETAILS', payload: {id: id, theDayID: dayID.id} });
     }
 
@@ -48,8 +48,6 @@ useEffect(() => {
         getSession();
         //getSessionDetails();
     }, [dayID]);
-
-
 
 
     // const formattedDate = moment(session[0].session_date).format("dddd, l"); 
@@ -90,18 +88,13 @@ useEffect(() => {
                                 <CardContent>
                                         <p>Exercise ID: {item.exercise_id}</p> 
                                         <h2>Exercise: {item.exercise_name}</h2>
-                                     
-                                </CardContent>
-                            
-
-
-                                <CardContent>
-                                        {sessionDetails.map((detail, i) => {
-                                                return (
-                                                    <>
-                                                    <p> Set: {detail.set_number} </p>
-                                                    <p> Reps: {detail.reps}</p>
-                                                    </>
+                                        
+                                        {sessionDetails.map((detail) => {
+                                            return (
+                                                <>
+                                                <p> Set: {detail.set_number} </p>
+                                                <p> Reps: {detail.reps}</p>
+                                                </>
                                                 )
                                         })}
                                 </CardContent>

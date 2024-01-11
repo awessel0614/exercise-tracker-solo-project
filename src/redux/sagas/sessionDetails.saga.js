@@ -2,35 +2,10 @@ import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
 
-// function* fetchSessionDetails(action) {
-//     try{
-//         const response = yield axios.get(`/api/sessionDetail/${action.payload}`);
-//         const actionDispatch = { type: 'SET_SESSION_DETAILS', payload: response.data }
-//         yield put(actionDispatch);
-
-//     } catch (error) {
-//         console.log('Error in fetching session details', error)
-//         alert('Something went wrong!');
-//     }
-// }
-
-
-// function* fetchSessionDetails(action) {
-//     try{
-//         const response = yield axios.get(`/api/sessionDetail/${action.payload}`);
-//         yield put({ type: 'SET_SESSION_DETAILS', payload: response.data });
-
-//     } catch (error) {
-//         console.log('Error in fetching session details', error)
-//         alert('Something went wrong!');
-//     }
-// }
-// ^^ working pretty much
-
 
 function* fetchSessionDetails(action) {
     try{
-        console.log("THIS IS THE ACTION.PAYLOAD BITCHHHHH", action.payload)
+        console.log("THIS IS THE ACTION.PAYLOAD", action.payload)
         const response = yield axios.get('/api/sessionDetail/details', {params: action.payload});
         yield put({ type: 'SET_SESSION_DETAILS', payload: response.data });
 
