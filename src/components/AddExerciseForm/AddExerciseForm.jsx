@@ -273,6 +273,12 @@ function AddExerciseForm() {
             history.push('/day');
         }
 
+        const goToDayPage = (event) => {
+            event.preventDefault();
+            console.log("going to day page");
+            history.push('/day');
+        }
+
 
     const dispatch = useDispatch();
     const exercises = useSelector(store => store.exercises)
@@ -283,6 +289,7 @@ function AddExerciseForm() {
 
     return (
         <>
+        <Button variant="contained" onClick = {goToDayPage}>Back To Day Page</Button>
         <h2>Here's the day id:{dayID.id}</h2>
         <h1>Enter Exercise Info:</h1>
 

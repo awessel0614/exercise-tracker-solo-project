@@ -201,6 +201,11 @@ function DayPage() {
         dispatch({ type: 'FETCH_SESSION_DETAILS', payload: {id: id, theDayID: dayID.id} });
     }
 
+    const deleteExercise = (id) => {
+        console.log("in deleteExercise function on DayPage");
+        dispatch({ type: 'DELETE_EXERCISE', payload: {id: id, theDayID: dayID.id} })
+    }
+
     const goToExerciseForm = (event) => {
         event.preventDefault();
         console.log("going to add exercise form");
@@ -255,7 +260,12 @@ return (
                     onClick = {() => getSessionDetails(item.exercise_id)}
                     key = {item.id}
                     >
-                
+                    <CardContent>
+                        <Button 
+                        variant="contained" 
+                        id="delete-button"
+                        onClick = {() => deleteExercise(item.exercise_id)} >DELETE</Button>    
+                    </CardContent>    
                     <CardContent>
                             <p>Exercise ID: {item.exercise_id}</p> 
                             <h2>Exercise: {item.exercise_name}</h2>
