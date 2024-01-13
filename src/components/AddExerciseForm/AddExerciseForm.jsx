@@ -295,7 +295,7 @@ function AddExerciseForm() {
         <Grid container direction="column" justify="center" alignItems="center">
         <Button variant="contained" onClick = {goToDayPage}>Back To Day Page</Button>
         <h2>Here's the day id:{dayID.id}</h2>
-        <h1>Enter Exercise Info:</h1>
+        <h1>Enter Exercise:</h1>
 
         <Box sx={{ minWidth: 120 }}>
             <FormControl onSubmit={handleSubmit} fullWidth>
@@ -332,8 +332,7 @@ function AddExerciseForm() {
                                         "& .MuiInputBase-root": 80,
                                         padding: .5,
                                         
-                                    }}
-                                    
+                                    }}      
                             />
                             <TextField 
                                 name="reps"
@@ -350,6 +349,7 @@ function AddExerciseForm() {
                                 name="weight"
                                 placeholder="Weight i.e. 20"
                                 variant="filled"
+                                required
                                 onChange={event => handleFormChange(event, index)}
                                 value={form.weight}
                                 sx = {{ width: 125, 

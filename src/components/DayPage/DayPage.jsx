@@ -244,8 +244,12 @@ return (
     <Button
         variant="contained"
         onClick={goToCalendarPage}
-        >Back to Calendar</Button>
+        >Go to Calendar</Button>
+
+  
     <h2>Day ID: {dayID.id}</h2>
+    
+    <Grid container sx={{justifyContent: "center"}}> 
     {/* <h1> {formattedDate}</h1> */}
     <Button
         variant="contained"
@@ -253,7 +257,7 @@ return (
         >Add Exercise</Button>
 
         
-    <Grid container sx={{justifyContent: "center"}}>
+    
     {session.map(item => {
         
         return (
@@ -261,6 +265,7 @@ return (
             <Grid margin = {'15px'}>
             <Paper elevation={8}>
                 {/* <CardActions onClick = {() => getSessionDetails(item.exercise_id)} > */}
+                <Grid container>
                 <Card 
                     style = 
                     {{ height: '600px', 
@@ -275,9 +280,12 @@ return (
                         variant="contained" 
                         id="delete-button"
                         onClick = {() => deleteExercise(item.exercise_id)} >DELETE</Button> 
-                        <EditIcon onClick = {() => editExercise(item.exercise_id)} ></EditIcon>
+                        <EditIcon 
+                            onClick = {() => editExercise(item.exercise_id)} 
+                            sx = {{float: "right"}}></EditIcon>
                           
-                    </CardContent>    
+                    </CardContent> 
+                    <Grid container direction="column" justify="center" alignItems="center">   
                     <CardContent>
                             <p>Exercise ID: {item.exercise_id}</p> 
                             <h2>Exercise: {item.exercise_name}</h2>
@@ -307,8 +315,9 @@ return (
                             </Table>
                         </TableContainer>
                     </CardContent>
-                    
+                    </Grid>
                 </Card>
+                </Grid>
                 {/* </CardActions> */}
             </Paper>
             </Grid> 

@@ -2,3 +2,11 @@
 .css-1hbyad5-MuiTypography-root {
     display: none !important;
 }
+
+.css-1e6y48t-MuiButtonBase-root-MuiButton-root {
+    display: none !important;
+}
+
+.css-16b5y55-MuiPickersLayout-contentWrapper {
+    padding-bottom: .1%;
+}
