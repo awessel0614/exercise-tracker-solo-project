@@ -268,7 +268,7 @@ return (
                 <Grid container>
                 <Card 
                     style = 
-                    {{ height: '600px', 
+                    {{ height: 'auto', 
                     width: '285px', 
                     paddingBottom:'30px', 
                     backgroundColor: "lightblue"}} 

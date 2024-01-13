@@ -306,6 +306,7 @@ function AddExerciseForm() {
                         label="selectedExercise"
                         //name="selectedExercise.exercise_id"
                         onChange={handleExerciseChange}
+                        sx = {{margin: 1}}
                         >
                         {exercises.map((exercise, i) =>
                             <MenuItem key={i} name={exercise.exercise_name} value={exercise.id}>{exercise.exercise_name}</MenuItem>
@@ -324,7 +325,7 @@ function AddExerciseForm() {
                         />
                             <TextField 
                                 name="set_number"
-                                placeholder="Set #"
+                                placeholder="Set#"
                                 variant="filled"
                                 onChange={event => handleFormChange(event, index)}
                                 value={form.set_number}
@@ -336,23 +337,23 @@ function AddExerciseForm() {
                             />
                             <TextField 
                                 name="reps"
-                                placeholder="Rep # ie 10"
+                                placeholder="Rep# ie 10"
                                 variant="filled"
                                 onChange={event => handleFormChange(event, index)}
                                 value={form.reps}
-                                sx = {{ width: 110, 
+                                sx = {{ width: 105, 
                                     "& .MuiInputBase-root": 80,
                                     padding: .5  
                                 }}
                             />
                             <TextField 
                                 name="weight"
-                                placeholder="Weight i.e. 20"
+                                placeholder="Weight ie 20"
                                 variant="filled"
                                 required
                                 onChange={event => handleFormChange(event, index)}
                                 value={form.weight}
-                                sx = {{ width: 125, 
+                                sx = {{ width: 115, 
                                     "& .MuiInputBase-root": 80,
                                     padding: .5  
                                 }}
@@ -363,7 +364,7 @@ function AddExerciseForm() {
                             href="https://fonts.googleapis.com/icon?family=Material+Icons"
                             />
                             <Icon 
-                                sx={{ color: green[500], paddingTop: 3 }}
+                                sx={{ color: green[500], paddingTop: 3, paddingLeft: .1 }}
                                 onClick={() => addSetRepRow()}>add_circle</Icon>
                             </Grid>
                         </div>
