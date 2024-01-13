@@ -185,7 +185,10 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { TextField, Button, Grid, Container } from "@mui/material";
-
+import Icon from '@mui/material/Icon';
+import { green } from '@mui/material/colors';
+import { red } from '@mui/material/colors';
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
@@ -289,6 +292,7 @@ function AddExerciseForm() {
 
     return (
         <>
+        <Grid container direction="column" justify="center" alignItems="center">
         <Button variant="contained" onClick = {goToDayPage}>Back To Day Page</Button>
         <h2>Here's the day id:{dayID.id}</h2>
         <h1>Enter Exercise Info:</h1>
@@ -313,19 +317,34 @@ function AddExerciseForm() {
                     return (
                         <>
                         <div key={index}>
+                        <Grid container margin={1} spacing={1} padding={1}>
+                        <RemoveCircleIcon
+                            sx={{ color: red[500], paddingTop: 3 }}
+                            onClick={() => deleteSetRepRow()}
+                        />
                             <TextField 
                                 name="set_number"
                                 placeholder="Set #"
                                 variant="filled"
                                 onChange={event => handleFormChange(event, index)}
                                 value={form.set_number}
+                                sx = {{ width: 60, 
+                                        "& .MuiInputBase-root": 80,
+                                        padding: .5,
+                                        
+                                    }}
+                                    
                             />
                             <TextField 
                                 name="reps"
-                                placeholder="Number of Reps i.e. 10"
+                                placeholder="Rep # ie 10"
                                 variant="filled"
                                 onChange={event => handleFormChange(event, index)}
                                 value={form.reps}
+                                sx = {{ width: 110, 
+                                    "& .MuiInputBase-root": 80,
+                                    padding: .5  
+                                }}
                             />
                             <TextField 
                                 name="weight"
@@ -333,28 +352,39 @@ function AddExerciseForm() {
                                 variant="filled"
                                 onChange={event => handleFormChange(event, index)}
                                 value={form.weight}
+                                sx = {{ width: 125, 
+                                    "& .MuiInputBase-root": 80,
+                                    padding: .5  
+                                }}
                             />
-                            <br></br>
-                            <Button 
-                                onClick={() => deleteSetRepRow(index)}
-                            >Delete Set/Rep</Button>
+                            
+                            <link
+                            rel="stylesheet"
+                            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+                            />
+                            <Icon 
+                                sx={{ color: green[500], paddingTop: 3 }}
+                                onClick={() => addSetRepRow()}>add_circle</Icon>
+                            </Grid>
                         </div>
                         </>
                     )
                })}
                </div>
             </FormControl>
-            <Button 
-                onClick={() => addSetRepRow()}
-            >Add Set/Rep</Button>
+           
             <br></br>
+            </Box>
             <Button 
                 onClick={handleSubmit}
-            >Submit</Button>
-        </Box>
+                variant="contained"
+                sx ={{alignItems: "center"}}
+            >Looks Good!</Button>
+        
 
         <br></br>
         <p>this is the id of the selected exercise: {selectedExercise.exercise_id}</p>
+        </Grid>
         </>
     )
 

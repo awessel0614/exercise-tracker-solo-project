@@ -171,6 +171,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import EditIcon from '@mui/icons-material/Edit'; 
 
 import { TextField, Button, Grid, Container, CardActions, Card, CardContent, Paper, Box } from "@mui/material";
 import './DayPage.css';
@@ -199,6 +200,13 @@ function DayPage() {
         console.log("id is:", id);
         console.log("dayID.id is:", dayID.id);
         dispatch({ type: 'FETCH_SESSION_DETAILS', payload: {id: id, theDayID: dayID.id} });
+    }
+
+    const editExercise = (id) => {
+        console.log("in editExercise function on DayPage");
+        console.log("id is:", id);
+        console.log("dayID.id is:", dayID.id);
+        //dispatch({ type: 'EDIT_EXERCISE', payload: {id: id, theDayID: dayID.id} })
     }
 
     const deleteExercise = (id) => {
@@ -266,7 +274,9 @@ return (
                         <Button 
                         variant="contained" 
                         id="delete-button"
-                        onClick = {() => deleteExercise(item.exercise_id)} >DELETE</Button>    
+                        onClick = {() => deleteExercise(item.exercise_id)} >DELETE</Button> 
+                        <EditIcon onClick = {() => editExercise(item.exercise_id)} ></EditIcon>
+                          
                     </CardContent>    
                     <CardContent>
                             <p>Exercise ID: {item.exercise_id}</p> 
