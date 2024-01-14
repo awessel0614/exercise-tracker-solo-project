@@ -359,15 +359,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import EditIcon from '@mui/icons-material/Edit'; 
-import FormControl from '@mui/material/FormControl';
 import { TextField, Button, Grid, Container, CardActions, Card, CardContent, Paper, Box } from "@mui/material";
 import SessionComponent from '../SessionComponent/SessionComponent';
 import './DayPage.css';
@@ -382,64 +373,13 @@ function DayPage() {
     const session = useSelector(store => store.session)
     const dayID = useSelector(store => store.dayID)
 
-    const [activateEditMode, setActivateEditMode] = useState(false);
-    const [newSessionDetails, setNewSessionDetails] = useState([{}]);
 
-
+    
     
     const getSession = () => {
         console.log("theID VALUE:", dayID.id)
         console.log("in getSession function on DayPage")
         dispatch({ type: 'FETCH_SESSION', payload: dayID.id });
-    }
-
-    // const getSessionDetails = (id) => {
-    //     console.log("in getSessionDetails function on DayPage");
-    //     console.log("id is:", id);
-    //     console.log("dayID.id is:", dayID.id);
-    //     dispatch({ type: 'FETCH_SESSION_DETAILS', payload: {id: id, theDayID: dayID.id} });
-    // }
-
-    const editMode = (id) => {
-        console.log("in editMode function on DayPage");
-        console.log("id is:", id);
-        console.log("dayID.id is:", dayID.id);
-        setActivateEditMode(!activateEditMode);
-        //dispatch({ type: 'FETCH_SESSION_DETAILS' })
-        //i think the part below might not work, i might need to provide an index number after sessionDetails?? not sure
-        
-        // setNewSessionDetails({
-        //     set_number: sessionDetails.set_number,
-        //     reps: sessionDetails.reps,
-        //     weight: sessionDetails.weight
-        // });
-
-        //dispatch({ type: 'EDIT_EXERCISE', payload: {id: id, theDayID: dayID.id} })
-    }
-
-    const sendNewSessionDetailsToServer = (id) => {
-        console.log('in sendNewSessionDetailsToServer');
-        console.log("id is:", id);
-        console.log("dayID.id is:", dayID.id);
-        console.log("THESE ARE THE NEW SESSION DETAILS:", newSessionDetails);
-        //dispatch({ type: EDIT_SESSION_DETAILS, payload: newSessionDetails})
-    }
-
-    const handleFormChange = (event, index) => {
-        
-            const values = [...newSessionDetails];
-            values[index][event.target.name] = event.target.value;
-            setNewSessionDetails(values);
-            console.log('!!!!!! NEWSESSIONDETAILS values:', newSessionDetails )
-    }
-
-
-
-    const deleteExercise = (id) => {
-        console.log("in deleteExercise function on DayPage");
-        console.log("id is:", id);
-        console.log("dayID.id is:", dayID.id);
-        dispatch({ type: 'DELETE_EXERCISE', payload: {id: id, theDayID: dayID.id} })
     }
 
     const goToExerciseForm = (event) => {
@@ -465,7 +405,6 @@ function DayPage() {
 
 return (
     <>
-    
     <Button
         variant="contained"
         onClick={goToCalendarPage}
@@ -481,8 +420,6 @@ return (
         onClick={goToExerciseForm}
         >Add Exercise</Button>
 
-        
-    
     {session.map(item => {
         
         return(
@@ -490,16 +427,8 @@ return (
             <SessionComponent sessionData={item}></SessionComponent>
             </>
         )
-    })}
-</Grid>
-
-<ul>
-    {sessionDetails.map((detail, i) =>
-        <>
-        <li key={i}>Set Number: {detail.set_number} Reps: {detail.reps} </li>
-        </>
-    )}
-</ul>
+        })}
+    </Grid>
     </>
 )
 }

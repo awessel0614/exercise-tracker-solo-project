@@ -15,6 +15,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import FormControl from '@mui/material/FormControl';
 import EditIcon from '@mui/icons-material/Edit'; 
+import './SessionComponent.css';
 
 
 
@@ -28,11 +29,14 @@ function SessionComponent (props) {
     const [sessionDetails, setSessionDetails] = useState([]);
 
 
-    const getSession = () => {
-        console.log("theID VALUE:", dayID.id)
-        console.log("in getSession function on DayPage")
-        dispatch({ type: 'FETCH_SESSION', payload: dayID.id });
-    }
+
+
+    // const getSession = () => {
+    //     console.log("theID VALUE:", dayID.id)
+    //     console.log("in getSession function on DayPage")
+    //     dispatch({ type: 'FETCH_SESSION', payload: dayID.id });
+    // }
+
 
     const getSessionDetails = (id) => {
         console.log("in getSessionDetails function on DayPage");
@@ -40,8 +44,8 @@ function SessionComponent (props) {
         console.log("dayID.id is:", dayID.id);
         fetchSessionDetails({id: id, theDayID: dayID.id})
         .then((response) => {setSessionDetails(response.data)})
-
     }
+
 
     async function fetchSessionDetails(payload) {
         try{
@@ -54,7 +58,6 @@ function SessionComponent (props) {
             alert('Something went wrong!');
         }
     }
-
 
 
     const editMode = (id) => {
@@ -74,6 +77,15 @@ function SessionComponent (props) {
         //dispatch({ type: 'EDIT_EXERCISE', payload: {id: id, theDayID: dayID.id} })
     }
 
+
+    const handleFormChange = (event, index) => {
+        const values = [...newSessionDetails];
+        values[index][event.target.name] = event.target.value;
+        setNewSessionDetails(values);
+        console.log('!!!!!! NEWSESSIONDETAILS values:', newSessionDetails )
+    }
+
+
     const sendNewSessionDetailsToServer = (id) => {
         console.log('in sendNewSessionDetailsToServer');
         console.log("id is:", id);
@@ -81,6 +93,8 @@ function SessionComponent (props) {
         console.log("THESE ARE THE NEW SESSION DETAILS:", newSessionDetails);
         //dispatch({ type: EDIT_SESSION_DETAILS, payload: newSessionDetails})
     }
+
+
     const deleteExercise = (id) => {
         console.log("in deleteExercise function on DayPage");
         console.log("id is:", id);
@@ -92,6 +106,10 @@ function SessionComponent (props) {
     useEffect(() => {
         getSessionDetails(props.sessionData.exercise_id);
     }, []);
+
+
+
+
 
     return (
         <>
@@ -105,35 +123,43 @@ function SessionComponent (props) {
                 width: '285px', 
                 paddingBottom:'30px', 
                 backgroundColor: "lightblue"}} 
-                
                 key = {props.sessionData.id}
                 >
 
-                <CardContent>
-                    <Button 
-                    variant="contained" 
-                    id="delete-button"
-                    onClick = {() => deleteExercise(props.sessionData.exercise_id)} >DELETE</Button> 
 
+                <CardContent>
                     {activateEditMode === false ? 
-                    <EditIcon 
-                        onClick={() => editMode()}
-                        sx = {{float: "right"}}></EditIcon>
+                    <div>
+                        <Button 
+                        variant="contained" 
+                        id="delete-button"
+                        onClick = {() => deleteExercise(props.sessionData.exercise_id)} >DELETE</Button> 
+
+
+                        <EditIcon 
+                            onClick={() => editMode()}
+                            sx = {{float: "right"}}></EditIcon>
+                    </div>
                     : 
-                    // <div>
-                        <Container>
+                     <div>
+                        <Container direction="column" justify="center" alignItems="center">
                         <Button variant='contained' id='edit-cancel-button' sx = {{float: "right"}} onClick={() => editMode(props.sessionData.exercise_id)}>Cancel</Button>
                         <Button variant='contained' id='edit-save-button' sx = {{float: "right"}} onClick = {() => sendNewSessionDetailsToServer(props.sessionData.exercise_id)}>Save</Button>
                         </Container>
-                    // </div>
+                     </div>
                     }
                 </CardContent> 
 
+
                 <Grid container direction="column" justify="center" alignItems="center">   
+
+
                 <CardContent>
                         <p>Exercise ID: {props.sessionData.exercise_id}</p> 
                         <h2>Exercise: {props.sessionData.exercise_name}</h2>
                 </CardContent>
+
+
                 <CardContent>
                     <TableContainer component={Paper}>
                         <Table sx={{ minWidth: 250 }} aria-label="simple table">
@@ -215,7 +241,11 @@ function SessionComponent (props) {
                         </Table>
                     </TableContainer>
                 </CardContent>
+
+
                 </Grid>
+
+
             </Card>
             </Grid>
             {/* </CardActions> */}
