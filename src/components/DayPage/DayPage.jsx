@@ -28,20 +28,9 @@ function DayPage() {
     const [activateEditMode, setActivateEditMode] = useState(false);
     const [newSessionDetails, setNewSessionDetails] = useState({});
 
-    const editMode = () => {
-        console.log("in editMode function on DayPage");
-        setActivateEditMode(!activateEditMode);
-    }
-
-    const sendNewSessionDetailsToServer = () => {
-        console.log('in sendNewSessionDetailsToServer');
-        //dispatch({ type: EDIT_SESSION_DETAILS, payload: newSessionDetails})
-    }
-   
 
     
     const getSession = () => {
-        
         console.log("theID VALUE:", dayID.id)
         console.log("in getSession function on DayPage")
         dispatch({ type: 'FETCH_SESSION', payload: dayID.id });
@@ -54,12 +43,51 @@ function DayPage() {
         dispatch({ type: 'FETCH_SESSION_DETAILS', payload: {id: id, theDayID: dayID.id} });
     }
 
-    const editExercise = (id) => {
-        console.log("in editExercise function on DayPage");
+    const editMode = (id) => {
+        console.log("in editMode function on DayPage");
         console.log("id is:", id);
         console.log("dayID.id is:", dayID.id);
+        setActivateEditMode(!activateEditMode);
+        dispatch({ type: 'FETCH_SESSION_DETAILS' })
+        //i think the part below might not work, i might need to provide an index number after sessionDetails?? not sure
+        setNewSessionDetails({
+            set_number: sessionDetails.set_number,
+            reps: sessionDetails.reps,
+            weight: sessionDetails.weight
+        });
+
         //dispatch({ type: 'EDIT_EXERCISE', payload: {id: id, theDayID: dayID.id} })
     }
+
+    const sendNewSessionDetailsToServer = () => {
+        console.log('in sendNewSessionDetailsToServer');
+        //dispatch({ type: EDIT_SESSION_DETAILS, payload: newSessionDetails})
+    }
+
+    const handleSetChange = (event) => {
+        setNewSessionDetails({
+            ...newSessionDetails,
+            set_number: event.target.value,
+       }) 
+       console.log("NEW SET NUMBER event.target.value is:", event.target.value);
+    }
+
+    const handleRepChange = (event) => {
+        setNewSessionDetails({
+            ...newSessionDetails,
+            reps: event.target.value,
+        })
+        console.log("NEW REP NUMBER event.target.value is:", event.target.value);
+    }
+
+    const handleWeightChange = (event) => {
+        setNewSessionDetails({
+            ...newSessionDetails,
+            weight: event.target.value,
+        })
+        console.log("NEW WEIGHT NUMBER event.target.value is:", event.target.value);
+    }
+
 
     const deleteExercise = (id) => {
         console.log("in deleteExercise function on DayPage");
@@ -172,15 +200,17 @@ return (
                                             <TableCell align="right">{detail.reps}</TableCell>
                                             <TableCell align="right">{detail.weight}</TableCell>                                           
                                             </div>
+
                                             : 
+
                                             <div>
                                             <TableCell component="th" scope="row">
                                             <TextField
                                                 name="set_number"
                                                 placeholder={detail.set_number}
                                                 variant="filled"
-                                                //onChange={event => handleFormChange(event, index)}
-                                                //value={form.set_number}
+                                                onChange={event => handleSetChange(event)}
+                                                defaultValue={newSessionDetails.set_number}
                                                 sx = {{ width: 40, 
                                                         "& .MuiInputBase-root": 80,
                                                         padding: .5,
@@ -193,8 +223,8 @@ return (
                                                     name="reps"
                                                     placeholder={detail.reps}
                                                     variant="filled"
-                                                    //onChange={event => handleFormChange(event, index)}
-                                                    //value={form.set_number}
+                                                    onChange={event => handleRepChange(event)}
+                                                    defaultValue={newSessionDetails.reps}
                                                     sx = {{ width: 50, 
                                                             "& .MuiInputBase-root": 80,
                                                             padding: .5,
@@ -207,8 +237,8 @@ return (
                                                     name="weight"
                                                     placeholder={detail.weight}
                                                     variant="filled"
-                                                    //onChange={event => handleFormChange(event, index)}
-                                                    //value={form.set_number}
+                                                    onChange={event => handleWeightChange(event)}
+                                                    defaultValue={newSessionDetails.weight}
                                                     sx = {{ width: 50, 
                                                             "& .MuiInputBase-root": 80,
                                                             padding: .5,
