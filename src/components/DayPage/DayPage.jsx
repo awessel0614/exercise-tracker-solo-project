@@ -26,7 +26,7 @@ function DayPage() {
     const dayID = useSelector(store => store.dayID)
 
     const [activateEditMode, setActivateEditMode] = useState(false);
-    const [newSessionDetails, setNewSessionDetails] = useState({});
+    const [newSessionDetails, setNewSessionDetails] = useState([{}]);
 
 
     
@@ -48,44 +48,71 @@ function DayPage() {
         console.log("id is:", id);
         console.log("dayID.id is:", dayID.id);
         setActivateEditMode(!activateEditMode);
-        dispatch({ type: 'FETCH_SESSION_DETAILS' })
+        //dispatch({ type: 'FETCH_SESSION_DETAILS' })
         //i think the part below might not work, i might need to provide an index number after sessionDetails?? not sure
-        setNewSessionDetails({
-            set_number: sessionDetails.set_number,
-            reps: sessionDetails.reps,
-            weight: sessionDetails.weight
-        });
+        
+        // setNewSessionDetails({
+        //     set_number: sessionDetails.set_number,
+        //     reps: sessionDetails.reps,
+        //     weight: sessionDetails.weight
+        // });
 
         //dispatch({ type: 'EDIT_EXERCISE', payload: {id: id, theDayID: dayID.id} })
     }
 
-    const sendNewSessionDetailsToServer = () => {
+    const sendNewSessionDetailsToServer = (id) => {
         console.log('in sendNewSessionDetailsToServer');
+        console.log("id is:", id);
+        console.log("dayID.id is:", dayID.id);
+        console.log("THESE ARE THE NEW SESSION DETAILS:", newSessionDetails);
         //dispatch({ type: EDIT_SESSION_DETAILS, payload: newSessionDetails})
     }
 
-    const handleSetChange = (event) => {
-        setNewSessionDetails({
-            ...newSessionDetails,
-            set_number: event.target.value,
-       }) 
-       console.log("NEW SET NUMBER event.target.value is:", event.target.value);
+    const handleSetChange = (event, index) => {
+        
+            const values = [...newSessionDetails];
+            values[index][event.target.name] = event.target.value;
+            setNewSessionDetails(values);
+            console.log('!!!!!! NEWSESSIONDETAILS values:', newSessionDetails )
+
+
+
+    //     setNewSessionDetails({
+    //         ...newSessionDetails,
+    //         set_number: event.target.value,
+    //    }) 
+    //    console.log("NEW SET NUMBER event.target.value is:", event.target.value);
+    // ^^ what i originally had
     }
 
-    const handleRepChange = (event) => {
-        setNewSessionDetails({
-            ...newSessionDetails,
-            reps: event.target.value,
-        })
-        console.log("NEW REP NUMBER event.target.value is:", event.target.value);
+    const handleRepChange = (event, index) => {
+        
+        const values = [...newSessionDetails];
+        values[index][event.target.name] = event.target.value;
+        setNewSessionDetails(values);
+        console.log('!!!!!! NEWSESSIONDETAILS values:', newSessionDetails )
+        
+        
+        // setNewSessionDetails({
+        //     ...newSessionDetails,
+        //     reps: event.target.value,
+        // })
+        // console.log("NEW REP NUMBER event.target.value is:", event.target.value);
     }
 
-    const handleWeightChange = (event) => {
-        setNewSessionDetails({
-            ...newSessionDetails,
-            weight: event.target.value,
-        })
-        console.log("NEW WEIGHT NUMBER event.target.value is:", event.target.value);
+    const handleWeightChange = (event, index) => {
+
+        const values = [...newSessionDetails];
+        values[index][event.target.name] = event.target.value;
+        setNewSessionDetails(values);
+        console.log('!!!!!! NEWSESSIONDETAILS values:', newSessionDetails )
+       
+       
+        // setNewSessionDetails({
+        //     ...newSessionDetails,
+        //     weight: event.target.value,
+        // })
+        // console.log("NEW WEIGHT NUMBER event.target.value is:", event.target.value);
     }
 
 
@@ -166,10 +193,12 @@ return (
                             onClick={() => editMode()}
                             sx = {{float: "right"}}></EditIcon>
                         : 
-                        <div>
-                            <Button variant='contained' id='edit-cancel-button' sx = {{float: "right"}} onClick={() => editMode()}>Cancel</Button>
-                            <Button variant='contained' id='edit-save-button' sx = {{float: "right"}} onClick={sendNewSessionDetailsToServer}>Save</Button>
-                        </div>
+                        // <div>
+                            <Container>
+                            <Button variant='contained' id='edit-cancel-button' sx = {{float: "right"}} onClick={() => editMode(item.exercise_id)}>Cancel</Button>
+                            <Button variant='contained' id='edit-save-button' sx = {{float: "right"}} onClick = {() => sendNewSessionDetailsToServer(item.exercise_id)}>Save</Button>
+                            </Container>
+                        // </div>
                         }
                     </CardContent> 
 
@@ -189,7 +218,7 @@ return (
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                  {sessionDetails.map((detail) => (
+                                  {sessionDetails.map((detail, index) => (
                                         <TableRow
                                             key={detail.id}
                                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -209,7 +238,7 @@ return (
                                                 name="set_number"
                                                 placeholder={detail.set_number}
                                                 variant="filled"
-                                                onChange={event => handleSetChange(event)}
+                                                onChange={event => handleSetChange(event, index)}
                                                 defaultValue={newSessionDetails.set_number}
                                                 sx = {{ width: 40, 
                                                         "& .MuiInputBase-root": 80,
@@ -223,7 +252,7 @@ return (
                                                     name="reps"
                                                     placeholder={detail.reps}
                                                     variant="filled"
-                                                    onChange={event => handleRepChange(event)}
+                                                    onChange={event => handleRepChange(event, index)}
                                                     defaultValue={newSessionDetails.reps}
                                                     sx = {{ width: 50, 
                                                             "& .MuiInputBase-root": 80,
@@ -237,7 +266,7 @@ return (
                                                     name="weight"
                                                     placeholder={detail.weight}
                                                     variant="filled"
-                                                    onChange={event => handleWeightChange(event)}
+                                                    onChange={event => handleWeightChange(event, index)}
                                                     defaultValue={newSessionDetails.weight}
                                                     sx = {{ width: 50, 
                                                             "& .MuiInputBase-root": 80,
