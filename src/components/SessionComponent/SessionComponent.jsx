@@ -152,14 +152,16 @@ function SessionComponent (props) {
 
 
                 <Grid container direction="column" justify="center" alignItems="center">   
-
-
-                <CardContent>
+                
+                <Box >    
+                <CardContent align="center">
                         <p>Exercise ID: {props.sessionData.exercise_id}</p> 
                         <h2>Exercise: {props.sessionData.exercise_name}</h2>
                 </CardContent>
+                </Box>
+                
 
-
+                <Box sx={{width: '100%'}}>
                 <CardContent>
                     <TableContainer component={Paper}>
                         <Table sx={{ minWidth: 250 }} aria-label="simple table">
@@ -186,9 +188,7 @@ function SessionComponent (props) {
                                         </div>
 
                                         : 
-
-                                        // <div>
-                                        
+                                        // <Box sx={{width: '100%'}}>
                                         <FormControl container onSubmit={sendNewSessionDetailsToServer} fullWidth>
                                         <TableCell component="th" scope="row">
                                         <TextField
@@ -232,8 +232,7 @@ function SessionComponent (props) {
                                             />
                                         </TableCell>
                                         </FormControl>
-                                        
-                                        // </div>
+                                        // </Box>                                                                           
                                         }
                                     </TableRow>
                                 ))}
@@ -241,8 +240,8 @@ function SessionComponent (props) {
                         </Table>
                     </TableContainer>
                 </CardContent>
-
-
+                </Box>
+                
                 </Grid>
 
 
