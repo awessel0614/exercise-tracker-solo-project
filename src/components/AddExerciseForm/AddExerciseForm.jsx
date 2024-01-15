@@ -325,7 +325,7 @@ function AddExerciseForm() {
                         />
                             <TextField 
                                 name="set_number"
-                                placeholder="Set#"
+                                placeholder="Set #"
                                 variant="filled"
                                 onChange={event => handleFormChange(event, index)}
                                 value={form.set_number}
