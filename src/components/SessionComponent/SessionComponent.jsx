@@ -188,21 +188,25 @@ function SessionComponent (props) {
                                         </div>
 
                                         : 
+                                        
                                         // <Box sx={{width: '100%'}}>
                                         <FormControl container onSubmit={sendNewSessionDetailsToServer} fullWidth>
+                                        <Box sx={{ display: 'flex' }}>
                                         <TableCell component="th" scope="row">
+                                        
                                         <TextField
                                             name="set_number"
                                             placeholder={detail.set_number}
                                             variant="filled"
                                             onChange={event => handleFormChange(event, index)}
                                             defaultValue={newSessionDetails.set_number}
-                                            sx = {{ width: 40, 
+                                            sx = {{ width: '150%', 
                                                     "& .MuiInputBase-root": 80,
-                                                    padding: .5,
+                                                    padding: .5,                                           
                                                 }}     
                                         />
                                         </TableCell>
+
 
                                         <TableCell component="th" scope="row">
                                             <TextField
@@ -211,12 +215,14 @@ function SessionComponent (props) {
                                                 variant="filled"
                                                 onChange={event => handleFormChange(event, index)}
                                                 defaultValue={newSessionDetails.reps}
-                                                sx = {{ width: 50, 
-                                                        "& .MuiInputBase-root": 80,
+                                                sx = {{ width: '150%', 
+                                                        // "& .MuiInputBase-root": 80,
                                                         padding: .5,
                                                     }}     
                                             />
+                                        
                                         </TableCell>
+
 
                                         <TableCell component="th" scope="row">
                                             <TextField
@@ -225,12 +231,13 @@ function SessionComponent (props) {
                                                 variant="filled"
                                                 onChange={event => handleFormChange(event, index)}
                                                 defaultValue={newSessionDetails.weight}
-                                                sx = {{ width: 50, 
+                                                sx = {{ width: '100%', 
                                                         "& .MuiInputBase-root": 80,
                                                         padding: .5,
                                                     }}     
                                             />
                                         </TableCell>
+                                        </Box>
                                         </FormControl>
                                         // </Box>                                                                           
                                         }

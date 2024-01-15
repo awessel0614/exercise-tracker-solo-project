@@ -3,16 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 
-//GET for all session details
-// router.get('/', (req, res) => {
-//   console.log("in sessionDetailrouter GET")
-//   pool.query('SELECT * FROM "session_details";').then((result) => {
-//     res.send(result.rows);
-//   }).catch((error) => {
-//     console.log('Error in GET /api/sessionDetail', error);
-//     res.sendStatus(500);
-//   }); 
-// });
+
 
 
 
@@ -34,6 +25,24 @@ const router = express.Router();
 // changing the /:id to something different for testing purposes
 
 
+//GET for all session details
+router.get('/remainingDetails', (req, res) => {
+  console.log("in sessionDetailrouter GET, req.query is:", req.query)
+  pool.query(
+    
+    `SELECT "exercise_id", "set_number", "reps", "weight" FROM "session_details"
+        WHERE "session_id" = $1;`,
+
+        [req.query.theDayID]
+    
+  
+  ).then((result) => {
+    res.send(result.rows);
+  }).catch((error) => {
+    console.log('Error in GET /api/remainingDetails', error);
+    res.sendStatus(500);
+  }); 
+});
 
 
   router.get('/details', (req, res) => {
