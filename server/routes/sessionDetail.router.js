@@ -25,7 +25,7 @@ const router = express.Router();
 // changing the /:id to something different for testing purposes
 
 
-//GET for all session details
+//GET for remaining session details
 router.get('/remainingDetails', (req, res) => {
   console.log("in sessionDetailrouter GET, req.query is:", req.query)
   pool.query(

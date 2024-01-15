@@ -67,6 +67,10 @@ function App() {
             <InfoPage />
           </ProtectedRoute>
 
+          <Route exact path='/calendar'>
+            <CalendarPage />
+          </Route>
+
           <ProtectedRoute
             // logged in shows DayPage else shows LoginPage
             exact path="/day">
@@ -74,7 +78,7 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows DayPage else shows LoginPage
+            // logged in shows AddExerciseForm else shows LoginPage
             exact path="/form">
             <AddExerciseForm />
           </ProtectedRoute>
@@ -112,9 +116,7 @@ function App() {
             }
           </Route>
 
-          <Route exact path='/calendar'>
-            <CalendarPage />
-          </Route>
+         
 
          
 
