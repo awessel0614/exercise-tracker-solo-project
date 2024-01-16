@@ -293,14 +293,15 @@ function AddExerciseForm() {
     return (
         <>
         <Grid container direction="column" justify="center" alignItems="center">
-        <Button variant="contained" onClick = {goToDayPage}>Back To Day Page</Button>
+        <Button variant="contained" sx = {{float: "left"}} onClick = {goToDayPage}>Back To Day Page</Button>
         <h2>Day id:{dayID.id}</h2>
         <h1>Enter Exercise:</h1>
 
         <Box sx={{ minWidth: 120 }}>
-            <FormControl onSubmit={handleSubmit} fullWidth>
+            <FormControl required onSubmit={handleSubmit}  fullWidth>
                 <InputLabel id="demo-simple-select-label">Select Exercise</InputLabel>
                     <Select
+                        required
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         label="selectedExercise"
@@ -324,6 +325,7 @@ function AddExerciseForm() {
                             onClick={() => deleteSetRepRow()}
                         />
                             <TextField 
+                                required
                                 name="set_number"
                                 placeholder="Set #"
                                 variant="filled"
@@ -336,6 +338,7 @@ function AddExerciseForm() {
                                     }}      
                             />
                             <TextField 
+                                required
                                 name="reps"
                                 placeholder="Rep# ie 10"
                                 variant="filled"
@@ -347,10 +350,10 @@ function AddExerciseForm() {
                                 }}
                             />
                             <TextField 
+                                required
                                 name="weight"
                                 placeholder="Weight ie 20"
                                 variant="filled"
-                                required
                                 onChange={event => handleFormChange(event, index)}
                                 value={form.weight}
                                 sx = {{ width: 115, 

@@ -426,9 +426,9 @@ return (
     {session.map(item => {
         
         return(
-            <>
-            <SessionComponent sessionData={item}></SessionComponent>
-            </>
+            
+            <SessionComponent key={item.exercise_id} sessionData={item}></SessionComponent>
+            
         )
         })}
     </Grid>
