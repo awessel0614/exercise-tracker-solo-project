@@ -196,6 +196,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import './AddExerciseForm.css';
+import swal from 'sweetalert';
 
 
 
@@ -269,11 +270,21 @@ function AddExerciseForm() {
 
         const handleSubmit = (event) => {
             event.preventDefault();
+            if (selectedExercise.exercise_id === 'test' || formFields[0].set_number === '' || formFields[0].reps === '' || formFields[0].weight === '') {
+                swal({
+                    title: 'Fill Out All Inputs',
+                    text: 'Please fill out all inputs!',
+                    icon: 'warning',
+                    buttons: true,
+                    dangerMode: true,
+                })
+            } else {
             console.log("here are the form fields", selectedExercise)
             dispatch({ type: 'SEND_SESSION_DETAILS_TO_SERVER', payload: {selectedExercise, formFields} });
             setSelectedExercise([{exercise_id: '', set_number: '', reps: '', weight: ''}]);
-
             history.push('/day');
+            
+            }
         }
 
         const goToDayPage = (event) => {
