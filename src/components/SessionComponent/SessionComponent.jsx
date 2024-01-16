@@ -88,6 +88,7 @@ function SessionComponent (props) {
         console.log("dayID.id is:", dayID.id);
         console.log("THESE ARE THE NEW SESSION DETAILS:", sessionDetails);
         dispatch({ type: 'EDIT_SESSION_DETAILS', payload: {id: id, theDayID: dayID.id, sessionDetails: sessionDetails }})
+        setActivateEditMode(!activateEditMode);
     }
 
 
