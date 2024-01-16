@@ -50,7 +50,7 @@ router.get('/remainingDetails', (req, res) => {
     console.log("in sessionDetailrouter GET, req.query is:", req.query)
     pool.query(
         
-        `SELECT "exercise_id", "set_number", "reps", "weight" FROM "session_details"
+        `SELECT "id", "exercise_id", "set_number", "reps", "weight" FROM "session_details"
         WHERE "exercise_id" = $1 AND "session_id" = $2;`,
 
         [req.query.id, req.query.theDayID]
@@ -121,11 +121,11 @@ router.put('/updateExercise', async (req, res) => {
         
         let queryText = `
             UPDATE "session_details" SET "set_number" = $1, "reps" = $2, "weight" = $3
-            WHERE "exercise_id" = $4 AND "session_id" = $5;
+            WHERE "exercise_id" = $4 AND "session_id" = $5 AND "id" = $6;
             `;
         for(let row of req.body.sessionDetails) {
             
-            await db.query(queryText, [row.set_number, row.reps, row.weight, req.body.id, req.body.theDayID]);
+            await db.query(queryText, [row.set_number, row.reps, row.weight, req.body.id, req.body.theDayID, row.id]);
         }
         await db.query('COMMIT');
         res.sendStatus(201);

@@ -38,6 +38,7 @@ function SessionComponent (props) {
 
 
     const getSessionDetails = (id) => {
+        console.log("!!!!!!!!!!!!", sessionDetails)
         console.log("in getSessionDetails function on DayPage");
         console.log("id is:", id);
         console.log("dayID.id is:", dayID.id);
@@ -109,6 +110,7 @@ function SessionComponent (props) {
 
     return (
         <>
+        
         <Grid margin = {'15px'}>
         <Paper elevation={8}>
             {/* <CardActions onClick = {() => getSessionDetails(props.sessionData.exercise_id)} > */}
@@ -151,6 +153,7 @@ function SessionComponent (props) {
                 
                 <Box >    
                 <CardContent align="center">
+                        
                         <p>Exercise ID: {props.sessionData.exercise_id}</p> 
                         <h2>Exercise: {props.sessionData.exercise_name}</h2>
                 </CardContent>
@@ -177,7 +180,7 @@ function SessionComponent (props) {
                                         {activateEditMode === false ? 
                                         
                                         <div> 
-                                                                                             
+                                                <p>{detail.id}</p>
                                         <TableCell component="th" scope="row">{detail.set_number}</TableCell>
                                         <TableCell align="right">{detail.reps}</TableCell>
                                         <TableCell align="right">{detail.weight}</TableCell>                                           
