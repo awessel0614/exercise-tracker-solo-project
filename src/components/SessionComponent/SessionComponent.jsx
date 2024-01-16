@@ -70,16 +70,6 @@ function SessionComponent (props) {
         console.log("id is:", id);
         console.log("dayID.id is:", dayID.id);
         setActivateEditMode(!activateEditMode);
-        //dispatch({ type: 'FETCH_SESSION_DETAILS' })
-        //i think the part below might not work, i might need to provide an index number after sessionDetails?? not sure
-        
-        // setNewSessionDetails({
-        //     set_number: sessionDetails.set_number,
-        //     reps: sessionDetails.reps,
-        //     weight: sessionDetails.weight
-        // });
-
-        //dispatch({ type: 'EDIT_EXERCISE', payload: {id: id, theDayID: dayID.id} })
     }
 
 
@@ -96,7 +86,7 @@ function SessionComponent (props) {
         console.log("id is:", id);
         console.log("dayID.id is:", dayID.id);
         console.log("THESE ARE THE NEW SESSION DETAILS:", sessionDetails);
-        //dispatch({ type: EDIT_SESSION_DETAILS, payload: newSessionDetails})
+        dispatch({ type: 'EDIT_SESSION_DETAILS', payload: {id: id, theDayID: dayID.id, sessionDetails: sessionDetails }})
     }
 
 
@@ -277,6 +267,51 @@ function SessionComponent (props) {
 
 
 export default SessionComponent;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

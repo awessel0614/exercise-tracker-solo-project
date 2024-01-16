@@ -16,12 +16,9 @@ function* fetchSessionDetails(action) {
 }
 
 
-
-
-
-
 function* sendSessionDetailsToServer(action) {
     try{
+        console.log("in sendSessionDetailsToServer saga, action.payload is:", action.payload)
         yield axios.post('/api/sessionDetail', action.payload);
         yield put({ type: 'FETCH_SESSION_DETAILS'})
     } catch (error) {
@@ -44,11 +41,23 @@ function* fetchRemainingSessionDetails(action) {
 }
 
 
-function* deleteExercise(action) {
+// function* deleteExercise(action) {
+//     try{
+//         console.log("in deleteExercise saga, action.payload is:", action.payload);
+//         yield axios.delete('/api/sessionDetail/deleteExercise', {params: action.payload});
+//         yield put({ type: 'FETCH_REMAINING_SESSION_DETAILS', payload: action.payload})
+//     } catch (error) {
+//         alert('Something went wront!');
+//         console.error('Error in deleting exercise', error)
+//         throw error;
+//     }
+// }
+
+function* editSessionDetails(action) {
     try{
-        console.log("in deleteExercise saga, action.payload is:", action.payload);
-        yield axios.delete('/api/sessionDetail/deleteExercise', {params: action.payload});
-        yield put({ type: 'FETCH_REMAINING_SESSION_DETAILS', payload: action.payload})
+        console.log("in editSessionDetails saga, action.payload is:", action.payload);
+        yield axios.put('/api/sessionDetail/updateExercise', action.payload);
+        yield put({ type: 'FETCH_SESSION_DETAILS', payload: action.payload})
     } catch (error) {
         alert('Something went wront!');
         console.error('Error in deleting exercise', error)
@@ -61,7 +70,8 @@ function* sessionDetailsSaga() {
     yield takeLatest('SEND_SESSION_DETAILS_TO_SERVER', sendSessionDetailsToServer);
     yield takeLatest('FETCH_SESSION_DETAILS', fetchSessionDetails);
     yield takeLatest('FETCH_REMAINING_SESSION_DETAILS', fetchRemainingSessionDetails);
-    yield takeLatest('DELETE_EXERCISE', deleteExercise);
+    //yield takeLatest('DELETE_EXERCISE', deleteExercise);
+    yield takeLatest('EDIT_SESSION_DETAILS', editSessionDetails);
 }
 
 export default sessionDetailsSaga;

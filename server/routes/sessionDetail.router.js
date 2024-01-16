@@ -45,6 +45,7 @@ router.get('/remainingDetails', (req, res) => {
 });
 
 
+//GET for session details of particular exercise on particular day
   router.get('/details', (req, res) => {
     console.log("in sessionDetailrouter GET, req.query is:", req.query)
     pool.query(
@@ -86,14 +87,7 @@ router.post('/', async (req, res) => {
     console.log('in POST for session detail router,', req.body)
     const db = await pool.connect();
     try {
-        await db.query('BEGIN');
-        //Creates a new session
-        // let queryText = `
-        //     INSERT INTO "session" ("user_id")
-        //     VALUES ($1) RETURNING "id";
-        // `;
-        // const result = await db.query(queryText, [req.user.id]);
-        // const sessionId = result.rows[0].id;
+        await db.query('BEGIN');   
         
         let queryText = `
             INSERT INTO "session_details" ("exercise_id", "session_id", "set_number", "reps", "weight")
@@ -117,7 +111,32 @@ router.post('/', async (req, res) => {
 
 
 
+//PUT
 
+router.put('/updateExercise', async (req, res) => {
+    console.log('in PUT for session detail router, req.body is', req.body)
+    const db = await pool.connect();
+    try {
+        await db.query('BEGIN');
+        
+        let queryText = `
+            UPDATE "session_details" SET "set_number" = $1, "reps" = $2, "weight" = $3
+            WHERE "exercise_id" = $4 AND "session_id" = $5;
+            `;
+        for(let row of req.body.sessionDetails) {
+            
+            await db.query(queryText, [row.set_number, row.reps, row.weight, req.body.id, req.body.theDayID]);
+        }
+        await db.query('COMMIT');
+        res.sendStatus(201);
+    } catch (e) {
+        console.log('ROLLBACK', e);
+        await db.query('ROLLBACK');
+        res.sendStatus(500);
+    } finally {
+        db.release();
+    }
+});
 
 
 
