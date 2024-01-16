@@ -26,23 +26,23 @@ const router = express.Router();
 
 
 //GET for remaining session details
-router.get('/remainingDetails', (req, res) => {
-  console.log("in sessionDetailrouter GET, req.query is:", req.query)
-  pool.query(
+// router.get('/remainingDetails', (req, res) => {
+//   console.log("in sessionDetailrouter GET, req.query is:", req.query)
+//   pool.query(
     
-    `SELECT "exercise_id", "set_number", "reps", "weight" FROM "session_details"
-        WHERE "session_id" = $1;`,
+//     `SELECT "id", "exercise_id", "set_number", "reps", "weight" FROM "session_details"
+//         WHERE "session_id" = $1;`,
 
-        [req.query.theDayID]
+//         [req.query.theDayID]
     
   
-  ).then((result) => {
-    res.send(result.rows);
-  }).catch((error) => {
-    console.log('Error in GET /api/remainingDetails', error);
-    res.sendStatus(500);
-  }); 
-});
+//   ).then((result) => {
+//     res.send(result.rows);
+//   }).catch((error) => {
+//     console.log('Error in GET /api/remainingDetails', error);
+//     res.sendStatus(500);
+//   }); 
+// });
 
 
 //GET for session details of particular exercise on particular day

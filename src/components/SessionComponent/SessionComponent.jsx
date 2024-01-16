@@ -78,7 +78,7 @@ function SessionComponent (props) {
         const values = [...sessionDetails];
         values[index][event.target.name] = event.target.value;
         setSessionDetails(values);
-        console.log('!!!!!! NEWSESSIONDETAILS values:', sessionDetails )
+        console.log('!!!!!! edited SESSIONDETAILS values:', sessionDetails )
     }
 
 
@@ -97,9 +97,8 @@ function SessionComponent (props) {
         console.log("id is:", id);
         console.log("dayID.id is:", dayID.id);
         dispatch({ type: 'DELETE_EXERCISE', payload: {id: id, theDayID: dayID.id} })
-        //getRemainingSessionDetails();  << tried this to get remaining cards to render on page after delete
+        //getSessionDetails();
     }
-
 
     useEffect(() => {
         getSessionDetails(props.sessionData.exercise_id);
@@ -143,7 +142,7 @@ function SessionComponent (props) {
                      <div>
                         <Container direction="column" justify="center" alignItems="center">
                         <Button variant='contained' id='edit-cancel-button' sx = {{float: "right"}} onClick={() => editMode(props.sessionData.exercise_id)}>Cancel</Button>
-                        <Button variant='contained' id='edit-save-button' sx = {{float: "right"}} onClick = {() => sendNewSessionDetailsToServer(props.sessionData.exercise_id)}>Save</Button>
+                        <Button variant='contained' id='edit-save-button' sx = {{float: "left"}} onClick = {() => sendNewSessionDetailsToServer(props.sessionData.exercise_id)}>Save</Button>
                         </Container>
                      </div>
                     }
@@ -180,6 +179,8 @@ function SessionComponent (props) {
                                     >                                          
                                         {activateEditMode === false ? 
                                         
+
+                                        //move conditional rendering up above the row
                                         <div> 
                                                 <p>{detail.id}</p>
                                         <TableCell component="th" scope="row">{detail.set_number}</TableCell>
@@ -633,123 +634,3 @@ export default SessionComponent;
 
 //         </Paper>
 //         </Grid> 
-                
-
-
-
-
-
-
-
-
-
-
-
-
-// {/* 
-//                 <Box sx={{width: '100%'}}>
-//                 <CardContent>
-//                     <TableContainer component={Paper}>
-//                         <Table sx={{ minWidth: 250 }} aria-label="simple table">
-//                             <TableHead>
-//                                 <TableRow>
-//                                     <TableCell>Set</TableCell>
-//                                     <TableCell align="right">Reps</TableCell>
-//                                     <TableCell align="right">Weight</TableCell>
-//                                 </TableRow>
-//                             </TableHead>
-//                             <TableBody>
-//                               {sessionDetails.map((detail, index) => (
-//                                     <TableRow
-//                                         key={detail.id}
-//                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-//                                     >                                          
-//                                         {activateEditMode === false ? 
-                                        
-//                                         <div> 
-                                                                                             
-//                                         <TableCell component="th" scope="row">{detail.set_number}</TableCell>
-//                                         <TableCell align="right">{detail.reps}</TableCell>
-//                                         <TableCell align="right">{detail.weight}</TableCell>                                           
-//                                         </div>
-
-//                                         : 
-                                        
-//                                         // <Box sx={{width: '100%'}}>
-//                                         // <TableRow
-//                                         // key={detail.id}
-//                                         // sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-//                                         // > 
-//                                         <FormControl container onSubmit={sendNewSessionDetailsToServer} fullWidth>
-//                                         <Box sx={{ display: 'flex' }}>
-                                        
-                                        
-//                                         <TableCell component="th" scope="row">
-//                                         <TextField
-//                                             name="set_number"
-//                                             placeholder={detail.set_number}
-//                                             variant="filled"
-//                                             onChange={event => handleFormChange(event, index)}
-//                                             defaultValue={newSessionDetails.set_number}
-//                                             sx = {{ width: '180%', 
-//                                                     "& .MuiInputBase-root": 80,
-//                                                     padding: .5,                                           
-//                                                 }}     
-//                                         />
-//                                         </TableCell>
-                                        
-
-                                        
-//                                         <TableCell component="th" scope="row">
-//                                             <TextField
-//                                                 name="reps"
-//                                                 placeholder={detail.reps}
-//                                                 variant="filled"
-//                                                 onChange={event => handleFormChange(event, index)}
-//                                                 defaultValue={newSessionDetails.reps}
-//                                                 sx = {{ width: '180%', 
-//                                                         // "& .MuiInputBase-root": 80,
-//                                                         padding: .5,
-//                                                     }}     
-//                                             />
-//                                         </TableCell>
-                                       
-
-                                        
-//                                         <TableCell component="th" scope="row">
-//                                             <TextField
-//                                                 name="weight"
-//                                                 placeholder={detail.weight}
-//                                                 variant="filled"
-//                                                 onChange={event => handleFormChange(event, index)}
-//                                                 defaultValue={newSessionDetails.weight}
-//                                                 sx = {{ width: '180%', 
-//                                                         "& .MuiInputBase-root": 80,
-//                                                         padding: .5,
-//                                                     }}     
-//                                             />
-//                                         </TableCell>
-                                        
-
-//                                         </Box>
-//                                         </FormControl>
-//                                         // </Box>                                                                           
-//                                         }
-//                                     </TableRow>
-//                                 ))}
-//                             </TableBody>
-//                         </Table>
-//                     </TableContainer>
-//                 </CardContent>
-//                 </Box>  */}
-                
-                
-//         </>
-//     )
-// }
-
-
-
-// export default SessionComponent;
-
-// ^^ a complete mess, 1/15

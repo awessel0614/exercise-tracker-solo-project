@@ -45,7 +45,7 @@ function* deleteExercise(action) {
     try{
         console.log("in deleteExercise saga, action.payload is:", action.payload);
         yield axios.delete('/api/sessionDetail/deleteExercise', {params: action.payload});
-        yield put({ type: 'FETCH_SESSION_DETAILS', payload: action.payload})
+        yield put({ type: 'FETCH_SESSION', payload: action.payload.theDayID });
     } catch (error) {
         alert('Something went wront!');
         console.error('Error in deleting exercise', error)

@@ -38,9 +38,9 @@ router.post('/', async (req, res) => {
   
         SELECT "session"."id" 
         FROM "session" 
-        WHERE "session_date" = $1;`
+        WHERE "session_date" = $1 AND "user_id" = $2;`
   
-  , [req.body]);
+  , [req.body, req.user.id]);
 
   if (checkSessionQuery.rows.length > 0) {
     console.log('the value of checkSessionQuery.rows[0].id is:', checkSessionQuery.rows[0].id)

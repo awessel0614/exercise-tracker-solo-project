@@ -374,12 +374,15 @@ function DayPage() {
     const dayID = useSelector(store => store.dayID)
 
 
-    
+
     
     const getSession = () => {
-        console.log("theID VALUE:", dayID.id)
-        console.log("in getSession function on DayPage")
-        dispatch({ type: 'FETCH_SESSION', payload: dayID.id });
+        // this avoids dispatching an empty id
+        if(dayID && dayID.id ) {
+            console.log("theID VALUE:", dayID.id)
+            console.log("in getSession function on DayPage")
+            dispatch({ type: 'FETCH_SESSION', payload: dayID.id });
+        }
     }
 
     const goToExerciseForm = (event) => {
@@ -438,4 +441,3 @@ export default DayPage;
 // wrapped the inputs in a form but that messed with the spacing entirely, it's also
 // still only capturing the first row of inputs... going to try to change the conditional
 // rendering a bit to see if that changes things
-
