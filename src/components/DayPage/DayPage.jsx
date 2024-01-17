@@ -2,39 +2,31 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { TextField, Button, Grid, Container, Card, CardContent, Paper } from "@mui/material";
+import { TextField, Button, Grid, Container, CardActions, Card, CardContent, Paper, Box } from "@mui/material";
+import SessionComponent from '../SessionComponent/SessionComponent';
 import './DayPage.css';
+
 
 
 function DayPage() {
     //var moment = require('moment');
     const dispatch = useDispatch();
     let history = useHistory();
-    //const sessionDetails = useSelector(store => store.sessionDetails)
+    const sessionDetails = useSelector(store => store.sessionDetails)
     const session = useSelector(store => store.session)
     const dayID = useSelector(store => store.dayID)
-   
 
 
 
     
     const getSession = () => {
-        
-        console.log("theID VALUE:", dayID.id)
-        console.log("in getSession function on DayPage")
-        dispatch({ type: 'FETCH_SESSION', payload: dayID.id });
-    }
-
-    
-    const getSessionDetails = () => {
-        if(dayID && dayID.id){
-            const action = { type: 'FETCH_SESSION_DETAILS', payload: dayID.id};
-            dispatch(action);
+        // this avoids dispatching an empty id
+        if(dayID && dayID.id ) {
+            console.log("theID VALUE:", dayID.id)
+            console.log("in getSession function on DayPage")
+            dispatch({ type: 'FETCH_SESSION', payload: dayID.id });
         }
     }
-    //^^works, just commenting out for testing
-
-     
 
     const goToExerciseForm = (event) => {
         event.preventDefault();
@@ -48,96 +40,41 @@ function DayPage() {
         history.push('/calendar');
     }
     
-useEffect(() => {
-        //getDayID();
+    useEffect(() => {
         getSession();
-        //getSessionDetails();
     }, [dayID]);
-
 
 
     // const formattedDate = moment(session[0].session_date).format("dddd, l"); 
     // console.log(formattedDate);
 
 
-    return (
-        <>
-            <Button
-                variant="contained"
-                onClick={goToCalendarPage}
-                >Back to Calendar</Button>
-            <h2>Day ID: {dayID.id}</h2>
-            {/* <h1> {formattedDate}</h1> */}
-            <Button
-                variant="contained"
-                onClick={goToExerciseForm}
-                >Add Exercise</Button>
+return (
+    <>
+    <Button
+        variant="contained"
+        onClick={goToCalendarPage}
+        >Go to Calendar</Button>
 
-                
-            <Grid container sx={{justifyContent: "center"}}>
-            {session.map(item => {
-                return (
-                    <>
-                      <Grid margin = {'15px'}>
-                        <Paper elevation={8}>
-                          <Card 
-                            style = 
-                            {{ height: '600px', 
-                            width: '225px', 
-                            paddingBottom:'30px', 
-                            backgroundColor: "lightblue"}} 
-                              
-                            key = {item.id}
-                          >
-                              <CardContent>
-                                      <h2>Exercise: {item.exercise_name}</h2>
-                                      {/* {sessionDetails.map((detail, i) => {
-                                            return (
-                                                <>
-                                                <p> Set Number: {detail.set_number} </p>
-                                                </>
-                                            )
-                                      })} */}
-                              </CardContent>
+  
+    <h2>Day ID: {dayID.id}</h2>
+    
+    <Grid container sx={{justifyContent: "center"}}> 
+    {/* <h1> {formattedDate}</h1> */}
+    <Button
+        variant="contained"
+        onClick={goToExerciseForm}
+        >Add Exercise</Button>
 
-
-
-                              {/* <CardContent>
-                                      <h2>Exercise: {item.exercise_name}</h2>
-                                      {sessionDetails.map((detail, i) => {
-                                            return (
-                                                <>
-                                                <p> Set: {detail.set_number} </p>
-                                                <p> Reps: {detail.reps}</p>
-                                                </>
-                                            )
-                                      })}
-                              </CardContent> */}
-                          </Card>
-                        </Paper>
-                      </Grid> 
-                    </>
-                )
-            })}
-        </Grid>
-
-        <ul>
-            {/* {sessionDetails.map((detail, i) =>
-                <>
-                <li key={i}>Set Number: {detail.set_number} Reps: {detail.reps} </li>
-                </>
-            )} */}
-        </ul>
-
+    {session.map(item => {
         
-            
-            
-            
-        </>
-    )
+        return(           
+            <SessionComponent key={item.exercise_id} sessionData={item}></SessionComponent>           
+        )
+        })}
+    </Grid>
+    </>
+)
 }
 
 export default DayPage;
-
-
-

@@ -25,6 +25,8 @@ router.get('/:id', (req, res) => {
 
 
 
+
+
 /**POST route, sends back ID of already created or newly created day*/
 router.post('/', async (req, res) => {
   console.log('POST for session router')
@@ -36,9 +38,9 @@ router.post('/', async (req, res) => {
   
         SELECT "session"."id" 
         FROM "session" 
-        WHERE "session_date" = $1;`
+        WHERE "session_date" = $1 AND "user_id" = $2;`
   
-  , [req.body]);
+  , [req.body, req.user.id]);
 
   if (checkSessionQuery.rows.length > 0) {
     console.log('the value of checkSessionQuery.rows[0].id is:', checkSessionQuery.rows[0].id)
