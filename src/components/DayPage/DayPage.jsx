@@ -51,6 +51,12 @@ function DayPage() {
 
 return (
     <>
+    {/* {sessionDetails.length > 0 ? 
+        <p>No exercises to display!</p>
+    
+    : <p>hi</p>} */}
+
+
     <Button
         variant="contained"
         onClick={goToCalendarPage}
@@ -62,21 +68,41 @@ return (
     <h3></h3> 
     {/* ^^delete the line above, it was just for spacing!!! */}
     
-    <Grid container sx={{justifyContent: "center"}}> 
-    {/* <h1> {formattedDate}</h1> */}
-    
-    <Button
-        variant="contained"
-        onClick={goToExerciseForm}
-        >Add Exercise</Button>
 
-    {session.map(item => {
+
+    {session.length > 0 ? 
+        <div>
+            <Grid container sx={{justifyContent: "center"}}>
+ 
+                {/* {formattedDate !== null ? 
+                <h1> {formattedDate}</h1> : ""
+                } */}
+                               
+                <Button
+                    variant="contained"
+                    onClick={goToExerciseForm}
+                    >Add Exercise</Button>
+
+                {session.map(item => {                  
+                    return(           
+                        <SessionComponent key={item.exercise_id} sessionData={item}></SessionComponent>           
+                    )
+                    })}
+            </Grid>
+        </div>
+    
+        : 
+        <div>
+            <p>No exercises to display!</p>
+                        
+            <Button
+            variant="contained"
+            onClick={goToExerciseForm}
+            >Add Exercise</Button>
+        </div>
+        }
+
         
-        return(           
-            <SessionComponent key={item.exercise_id} sessionData={item}></SessionComponent>           
-        )
-        })}
-    </Grid>
     </>
 )
 }
