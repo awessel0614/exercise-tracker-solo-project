@@ -98,6 +98,8 @@ function SessionComponent (props) {
                     buttons: false,
                     timer: 1000,
                 });
+            } else {
+                <></>
             }
         });
 
