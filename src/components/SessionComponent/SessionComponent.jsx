@@ -15,6 +15,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import FormControl from '@mui/material/FormControl';
 import EditIcon from '@mui/icons-material/Edit'; 
+import swal from 'sweetalert';
 import './SessionComponent.css';
 
 
@@ -93,6 +94,29 @@ function SessionComponent (props) {
 
 
     const deleteExercise = (id) => {
+
+        swal({
+            title: 'Are you sure?',
+            text: 'Do you want to delete this exercise?',
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true,
+        }) .then (deleteIt => {
+            if(deleteIt) {
+                dispatch({ type: 'DELETE_EXERCISE', payload: {id: id, theDayID: dayID.id} });
+                swal({
+                    title: 'Deleted!',
+                    text: 'Your exercise has been deleted',
+                    icon: 'success',
+                    buttons: false,
+                    timer: 1000,
+                });
+            }
+        });
+
+
+
+
         console.log("in deleteExercise function on DayPage");
         console.log("id is:", id);
         console.log("dayID.id is:", dayID.id);
