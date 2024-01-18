@@ -149,10 +149,16 @@ function AddExerciseForm() {
                         <>
                         <div key={index}>
                         <Grid container margin={1} spacing={1} padding={1}>
-                        <RemoveCircleIcon
+
+                        {index !== 0 ?
+                            <RemoveCircleIcon
                             sx={{ color: red[500], paddingTop: 3 }}
                             onClick={() => deleteSetRepRow(index)}
                         />
+                        : ""
+                        }
+
+                        
                             <TextField 
                                 required
                                 name="set_number"
