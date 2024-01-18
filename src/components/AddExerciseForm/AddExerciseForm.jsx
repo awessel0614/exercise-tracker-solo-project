@@ -305,7 +305,7 @@ function AddExerciseForm() {
         <>
         <Grid container direction="column" justify="center" alignItems="center">
         <Button variant="contained" sx = {{float: "left"}} onClick = {goToDayPage}>Back To Day Page</Button>
-        <h2>Day id:{dayID.id}</h2>
+        {/* <h2>Day id:{dayID.id}</h2> */}
         <h1>Enter Exercise:</h1>
 
         <Box sx={{ minWidth: 120 }}>
@@ -333,7 +333,7 @@ function AddExerciseForm() {
                         <Grid container margin={1} spacing={1} padding={1}>
                         <RemoveCircleIcon
                             sx={{ color: red[500], paddingTop: 3 }}
-                            onClick={() => deleteSetRepRow()}
+                            onClick={() => deleteSetRepRow(index)}
                         />
                             <TextField 
                                 required
@@ -398,7 +398,7 @@ function AddExerciseForm() {
         
 
         <br></br>
-        <p>this is the id of the selected exercise: {selectedExercise.exercise_id}</p>
+        {/* <p>this is the id of the selected exercise: {selectedExercise.exercise_id}</p> */}
         </Grid>
         </>
     )

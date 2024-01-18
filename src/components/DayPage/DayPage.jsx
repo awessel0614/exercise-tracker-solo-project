@@ -55,12 +55,16 @@ return (
         variant="contained"
         onClick={goToCalendarPage}
         >Go to Calendar</Button>
+        
 
   
-    <h2>Day ID: {dayID.id}</h2>
+    {/* <h2>Day ID: {dayID.id}</h2> */}
+    <h3></h3> 
+    {/* ^^delete the line above, it was just for spacing!!! */}
     
     <Grid container sx={{justifyContent: "center"}}> 
     {/* <h1> {formattedDate}</h1> */}
+    
     <Button
         variant="contained"
         onClick={goToExerciseForm}

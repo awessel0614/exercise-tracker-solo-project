@@ -154,7 +154,8 @@ function SessionComponent (props) {
                 <Box >    
                 <CardContent align="center">
                         
-                        <p>Exercise ID: {props.sessionData.exercise_id}</p> 
+                        {/* <p>Exercise ID: {props.sessionData.exercise_id}</p>  */}
+                        {/* ^^ commenting out just for the solo project demo */}
                         <h2>Exercise: {props.sessionData.exercise_name}</h2>
                 </CardContent>
                 </Box>
@@ -182,7 +183,7 @@ function SessionComponent (props) {
 
                                         //move conditional rendering up above the row
                                         <div> 
-                                                <p>{detail.id}</p>
+                                                {/* <p>{detail.id}</p>   << uncomment this to see the row ID again */} 
                                         <TableCell component="th" scope="row">{detail.set_number}</TableCell>
                                         <TableCell align="right">{detail.reps}</TableCell>
                                         <TableCell align="right">{detail.weight}</TableCell>                                           

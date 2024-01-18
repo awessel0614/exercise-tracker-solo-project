@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { TextField, Button, Grid, Container } from "@mui/material";
+import { TextField, Button, Box, Grid, Container } from "@mui/material";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
@@ -46,11 +46,14 @@ function CalendarPage() {
                 />
             </LocalizationProvider>
 
-            <p>here's the day : {chosenDate}</p>
+            {/* <p>here's the day : {chosenDate}</p> */}
+            <Box sx ={{justify: 'center'}}>
             <Button 
+                
                 variant="contained"
                 onClick={goToDayPage}
-                >Click to go to day page</Button>
+                >Let's Go!</Button>
+                </Box>
         </>
     )
 }
