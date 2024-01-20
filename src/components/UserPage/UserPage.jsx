@@ -49,9 +49,10 @@
 
 import React from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import { TextField, Button, Grid, Container } from "@mui/material";
+import { TextField, Button, Box, Grid, Container } from "@mui/material";
 import { useHistory } from 'react-router-dom';
 import {useSelector} from 'react-redux';
+import './UserPage.css';
 
 function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
@@ -68,14 +69,21 @@ function UserPage() {
 
 
   return (
+    <div>
+      {/* <Grid direction="column" justify="center" alignItems="center"> */}
+      
     <div className="container">
-      <h2>Welcome, {user.username}!</h2>
-      <p>Your ID is: {user.id}</p>
+      <h2 id="welcome">Welcome, {user.username}!</h2>
+      {/* <p>Your ID is: {user.id}</p> */}
       <Button 
+        id="go-to-calendar-btn"
         variant="contained"
         onClick={goToCalendar}
       >Get Started!</Button>
-      <LogOutButton className="btn" />
+      {/* <LogOutButton className="btn" /> */}
+    </div>
+    
+    {/* </Grid> */}
     </div>
   );
 }

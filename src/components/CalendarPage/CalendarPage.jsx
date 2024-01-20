@@ -35,7 +35,7 @@ function CalendarPage() {
     return (
         <>
             
-            <h2>Pick a date to add exercises to!</h2>
+            <h1 id="pick-a-date-text">Pick a date to add exercises to!</h1>
 
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <StaticDatePicker 
@@ -43,6 +43,7 @@ function CalendarPage() {
                     selected={chosenDate}
                     onChange={handleDateChange}
                     dateFormat={'YYYY/mm/dd'}
+                    sx= {{}}
                 />
             </LocalizationProvider>
 

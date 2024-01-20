@@ -1,3 +1,11 @@
+/* #body {
+    background-image: url('/public/images/imageone.jpg');
+    background-size: cover;
+    background-position: center;
+  } */
+
+/* ^^ not sure if i'll need that, was importing it just in case */
+
 
 .css-1hbyad5-MuiTypography-root {
     display: none !important;
@@ -10,3 +18,30 @@
 .css-16b5y55-MuiPickersLayout-contentWrapper {
     padding-bottom: .1%;
 }
+
+
+#pick-a-date-text {
+    color: white;
+    text-align: center;
+}
+
+/* targets the calendar */
+.css-4pax7l-MuiPickersLayout-root {
+    display: grid;
+    grid-auto-columns: max-content auto max-content;
+    grid-auto-rows: max-content auto max-content;
+    overflow: hidden;
+    min-width: 320px;
+    background-color: rgba(165, 194, 160, 0.817)
+    /* color: white; */
+}
+
+
+
+/* .MuiPickersLayout-root {
+    background-color: rgba(165, 194, 160, 0.211);
+} */
+
+
+
+
