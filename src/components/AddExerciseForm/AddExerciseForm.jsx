@@ -2,7 +2,7 @@
 // import React, { useEffect, useState } from 'react';
 // import { useSelector, useDispatch } from 'react-redux';
 // import { useHistory } from 'react-router-dom';
-// import { TextField, Button, Grid, Container, Input } from "@mui/material";
+// import { TextField, Button, Card, CardContent, Grid, Container, Input } from "@mui/material";
 // import Icon from '@mui/material/Icon';
 // import { green } from '@mui/material/colors';
 // import { red } from '@mui/material/colors';
@@ -22,6 +22,7 @@
 // function AddExerciseForm() {
 //     const session = useSelector(store => store.session)
 //     const dayID = useSelector(store => store.dayID)
+//     const [highestWeight, setHighestWeight] = useState(0);
 
 
 
@@ -55,6 +56,17 @@
 //                 ...selectedExercise,
 //                 exercise_id: event.target.value,
 //            }) 
+
+//            axios.get('/api/sessionDetail/highestWeight', {params: {id: event.target.value}})
+//                 .then(response => {
+//                     setHighestWeight(response.data);
+//                     console.log("THIS IS HIGHEST WEIGHT", highestWeight);
+                    
+//                 }).catch((error) => {
+//                     console.error(error);
+//                     alert('Something went wrong!');
+//                 }); 
+
 //            console.log("this is the event.target.value for exercise ID", event.target.value);
 //         };
 
@@ -125,6 +137,7 @@
 //         <Button variant="contained" sx = {{float: "left"}} onClick = {goToDayPage}>Back To Day Page</Button>
 //         {/* <h2>Day id:{dayID.id}</h2> */}
 //         <h1>Enter Exercise:</h1>
+        
 
 //         <Box sx={{ minWidth: 120 }}>
 //             <FormControl required={true} onSubmit={handleSubmit}  fullWidth>
@@ -142,6 +155,13 @@
 //                             <MenuItem key={i} name={exercise.exercise_name} value={exercise.id}>{exercise.exercise_name}</MenuItem>
 //                         )}    
 //                     </Select>
+
+//                     {highestWeight.length > 0 ?     
+//                         <>
+//                         <p>Your PR for this exercise is: {highestWeight[0].weight}</p>
+//                         </>
+//                         :
+//                         ""}
 //                     <br></br>
 //                 <div>
 //                {formFields.map((form, index) => {
@@ -222,7 +242,7 @@
         
 
 //         <br></br>
-//         {/* <p>this is the id of the selected exercise: {selectedExercise.exercise_id}</p> */}
+//         <p>this is the id of the selected exercise: {selectedExercise.exercise_id}</p>
 //         </Grid>
 //         </>
 //     )
@@ -268,17 +288,11 @@
 
 
 
-
-
-
-
-
-
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { TextField, Button, Grid, Container, Input } from "@mui/material";
+import { TextField, Button, Card, CardContent, Grid, Container, Input } from "@mui/material";
 import Icon from '@mui/material/Icon';
 import { green } from '@mui/material/colors';
 import { red } from '@mui/material/colors';
@@ -409,13 +423,24 @@ function AddExerciseForm() {
 
     return (
         <>
+        <Button 
+            id="back-to-day-page-btn"
+            variant="contained" 
+            sx = {{float: "left", backgroundColor: "#567d78", marginLeft: '15px'}} 
+            onClick = {goToDayPage}>Back</Button>
+
         <Grid container direction="column" justify="center" alignItems="center">
-        <Button variant="contained" sx = {{float: "left"}} onClick = {goToDayPage}>Back To Day Page</Button>
-        {/* <h2>Day id:{dayID.id}</h2> */}
-        <h1>Enter Exercise:</h1>
         
 
+        {/* <h2>Day id:{dayID.id}</h2> */}
+        <h1 id="enter-exercise">Enter Exercise:</h1>
+        
+        
         <Box sx={{ minWidth: 120 }}>
+            <Card
+                sx={{margin: '10px'}}
+            >
+            <CardContent>
             <FormControl required={true} onSubmit={handleSubmit}  fullWidth>
                 <InputLabel id="demo-simple-select-label">Select Exercise</InputLabel>
                     <Select
@@ -434,7 +459,7 @@ function AddExerciseForm() {
 
                     {highestWeight.length > 0 ?     
                         <>
-                        <p>Your PR for this exercise is: {highestWeight[0].weight}</p>
+                        <p id="pr-line">Your PR for this exercise is: {highestWeight[0].weight}</p>
                         </>
                         :
                         ""}
@@ -444,14 +469,18 @@ function AddExerciseForm() {
                     return (
                         <>
                         <div key={index}>
-                        <Grid container margin={1} spacing={1} padding={1}>
+                        <Grid container margin={1} spacing={1} padding={1} >
 
                         {index !== 0 ?
                             <RemoveCircleIcon
                             sx={{ color: red[500], paddingTop: 3 }}
                             onClick={() => deleteSetRepRow(index)}
                         />
-                        : ""
+                        : 
+                        <RemoveCircleIcon
+                            sx={{ opacity: '0%', paddingTop: 3 }}                       
+                        />
+
                         }
 
                             <TextField 
@@ -461,7 +490,7 @@ function AddExerciseForm() {
                                 variant="filled"
                                 onChange={event => handleFormChange(event, index)}
                                 value={form.set_number}
-                                sx = {{ width: 60, 
+                                sx = {{ width: '20%', 
                                         "& .MuiInputBase-root": 80,
                                         padding: .5,
                                         
@@ -470,11 +499,11 @@ function AddExerciseForm() {
                             <TextField 
                                 required
                                 name="reps"
-                                placeholder="Rep# ie 10"
+                                placeholder="Rep #"
                                 variant="filled"
                                 onChange={event => handleFormChange(event, index)}
                                 value={form.reps}
-                                sx = {{ width: 105, 
+                                sx = {{ width: '25%', 
                                     "& .MuiInputBase-root": 80,
                                     padding: .5  
                                 }}
@@ -486,7 +515,7 @@ function AddExerciseForm() {
                                 variant="filled"
                                 onChange={event => handleFormChange(event, index)}
                                 value={form.weight}
-                                sx = {{ width: 115, 
+                                sx = {{ width: '25%', 
                                     "& .MuiInputBase-root": 80,
                                     padding: .5  
                                 }}
@@ -508,17 +537,20 @@ function AddExerciseForm() {
             </FormControl>
            
             <br></br>
+            </CardContent>
+            </Card>
             </Box>
             <Button 
             // type='submit'
+                id="looks-good-btn"
                 onClick={handleSubmit}
                 variant="contained"
-                sx ={{alignItems: "center"}}
+                sx ={{alignItems: "center", backgroundColor: "#567d78"}}
             >Looks Good!</Button>
         
 
         <br></br>
-        <p>this is the id of the selected exercise: {selectedExercise.exercise_id}</p>
+        {/* <p>this is the id of the selected exercise: {selectedExercise.exercise_id}</p> */}
         </Grid>
         </>
     )

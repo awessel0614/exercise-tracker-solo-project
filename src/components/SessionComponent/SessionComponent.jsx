@@ -131,7 +131,8 @@ function SessionComponent (props) {
                 {{ height: 'auto', 
                 width: '285px', 
                 paddingBottom:'30px', 
-                backgroundColor: "lightblue"}} 
+                backgroundColor: "#cec0b4",              
+                }} 
                 key = {props.sessionData.id}
                 >
 
