@@ -185,6 +185,7 @@ function SessionComponent (props) {
                                         </TableRow>
                                     </TableHead>
 
+                                    <TableBody>
                                     {sessionDetails.map((detail) => (
                                     <TableRow
                                         key={detail.id}
@@ -197,6 +198,7 @@ function SessionComponent (props) {
                                         <TableCell align="right">{detail.weight}</TableCell>                                           
                                      </TableRow>   
                                     ))}
+                                    </TableBody>
                                 </Table>
                             </TableContainer>                                          
                         </CardContent>
