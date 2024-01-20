@@ -25,16 +25,26 @@
     text-align: center;
 }
 
+.css-1u23akw-MuiButtonBase-root-MuiPickersDay-root.Mui-selected:hover {
+    
+    background-color: #288e4f;
+
+}
+.css-1u23akw-MuiButtonBase-root-MuiPickersDay-root:focus.Mui-selected {
+    
+    background-color: #15c073;
+}
+
 /* targets the calendar */
-.css-4pax7l-MuiPickersLayout-root {
+/* .css-4pax7l-MuiPickersLayout-root {
     display: grid;
     grid-auto-columns: max-content auto max-content;
     grid-auto-rows: max-content auto max-content;
     overflow: hidden;
     min-width: 320px;
     background-color: rgba(165, 194, 160, 0.817)
-    /* color: white; */
-}
+    
+} */
 
 
 

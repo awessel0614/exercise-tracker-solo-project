@@ -9,6 +9,7 @@ import { StaticDatePicker } from '@mui/x-date-pickers';
 import './CalendarPage.css';
 
 
+
 function CalendarPage() {
     let history = useHistory();
     const dispatch = useDispatch();
@@ -35,26 +36,38 @@ function CalendarPage() {
     return (
         <>
             
-            <h1 id="pick-a-date-text">Pick a date to add exercises to!</h1>
-
+        <h1 id="pick-a-date-text">Pick a date to add exercises to!</h1>
+        <Box container sx ={{justifyContent: "center", alignItems: "center", textAlign: "center"}}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <StaticDatePicker 
                     value={chosenDate}
                     selected={chosenDate}
                     onChange={handleDateChange}
                     dateFormat={'YYYY/mm/dd'}
-                    sx= {{}}
+                    sx= {{  
+                                            
+                        bgcolor: 'white',
+                        opacity: '85%',
+                        margin: '15px',
+                        borderBottom: '100px',
+                        marginBottom: '5px',
+                        paddingBottom: '.1%',
+                        // maxWidth: '90%',
+                        // minWidth: '90%',                      
+                    }}
                 />
             </LocalizationProvider>
 
             {/* <p>here's the day : {chosenDate}</p> */}
-            <Box sx ={{justify: 'center'}}>
+            
             <Button 
-                
+                id="lets-go-btn"
                 variant="contained"
                 onClick={goToDayPage}
+                sx={{textTransform: "none", bgcolor: '#567d78', alignItems: "center"}}
                 >Let's Go!</Button>
-                </Box>
+        </Box>
+            
         </>
     )
 }
