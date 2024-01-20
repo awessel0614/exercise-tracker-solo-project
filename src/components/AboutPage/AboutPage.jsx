@@ -1,5 +1,6 @@
 import React from 'react';
 import Footer from '../Footer/Footer';
+import './AboutPage.css';
 
 // This is one of our simplest components
 // It doesn't have local state,
@@ -12,11 +13,12 @@ function AboutPage() {
       <div>
         <h2>Thank you so much for using the Exerciser Tracker app!</h2>
         <p>I wanted to create something that I would get real-life use from, and I'm
-          happy to say that I've done that! Thank you to everyone in the Taaffeite cohort, our
-          instructor Chris Black, and to all of the Prime staff! It's been an incredibly rewarding
+          happy to say that I've done that! Thank you to our instructor Chris Black, 
+          everyone in the Taaffeite cohort, and to all of the staff at Prime Academy! 
+          It's been an incredibly rewarding
           (and at times, a whirlwind) experience!
         </p>
-        <ol>Technologies used:</ol>
+        <ul>Technologies used:</ul>
           <li>HTML & CSS</li>
           <li>Javascript</li>
           <li>Axios</li>

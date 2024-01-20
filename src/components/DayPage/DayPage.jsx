@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { TextField, Button, Grid, Container, CardActions, Card, CardContent, Paper, Box } from "@mui/material";
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import SessionComponent from '../SessionComponent/SessionComponent';
 import './DayPage.css';
 
@@ -58,14 +59,24 @@ return (
 
 
     <Button
+        id="calendar-btn"
         variant="contained"
         onClick={goToCalendarPage}
-        >Go to Calendar</Button>
-        
-
+        sx={{marginLeft: '15px'}}
+        >Back</Button>
+    <br></br>
+    <br></br>
+    
+    <Box textAlign="center">    
+    <Button
+        id="add-exercise-btn"
+        variant="contained"
+        onClick={goToExerciseForm}
+        >Add Exercise +</Button>
+    </Box>
   
     {/* <h2>Day ID: {dayID.id}</h2> */}
-    <h3></h3> 
+    
     {/* ^^delete the line above, it was just for spacing!!! */}
     
 
@@ -78,10 +89,7 @@ return (
                 <h1> {formattedDate}</h1> : ""
                 } */}
                                
-                <Button
-                    variant="contained"
-                    onClick={goToExerciseForm}
-                    >Add Exercise</Button>
+                
 
                 {session.map(item => {                  
                     return(           
@@ -93,12 +101,12 @@ return (
     
         : 
         <div>
-            <p>No exercises to display!</p>
+            <h1 id="no-exercises">No exercises to display!</h1>
                         
-            <Button
+            {/* <Button
             variant="contained"
             onClick={goToExerciseForm}
-            >Add Exercise</Button>
+            >Add Exercise</Button> */}
         </div>
         }
 
