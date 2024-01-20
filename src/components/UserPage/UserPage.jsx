@@ -71,7 +71,7 @@ function UserPage() {
   return (
     <div>
       {/* <Grid direction="column" justify="center" alignItems="center"> */}
-      
+    <Box textAlign="center">
     <div className="container">
       <h2 id="welcome">Welcome, {user.username}!</h2>
       {/* <p>Your ID is: {user.id}</p> */}
@@ -82,7 +82,7 @@ function UserPage() {
       >Get Started!</Button>
       {/* <LogOutButton className="btn" /> */}
     </div>
-    
+    </Box>   
     {/* </Grid> */}
     </div>
   );

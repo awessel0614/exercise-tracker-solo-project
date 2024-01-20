@@ -83,6 +83,7 @@ function LandingPage() {
   };
 
   return (
+    
     <div className="container">
       <h1 id="meet">Meet your Exercise Calendar!</h1>
 
@@ -108,6 +109,8 @@ function LandingPage() {
         </div>
       </div>
     </div>
+    
+   
   );
 }
 

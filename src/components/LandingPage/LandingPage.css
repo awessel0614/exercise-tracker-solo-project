@@ -124,6 +124,9 @@ body {
   background-image: url('/public/images/imageone.jpg');
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  
 }
 
 

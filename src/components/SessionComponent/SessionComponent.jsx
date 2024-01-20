@@ -121,7 +121,8 @@ function SessionComponent (props) {
 
 
     return (
-        <>       
+        <>
+        <body className="session-component">      
         <Grid margin = {'15px'}>
         <Paper elevation={8}>           
             <Grid container>
@@ -303,6 +304,7 @@ function SessionComponent (props) {
             </Grid>            
         </Paper>
         </Grid> 
+        </body>
         </>
     )
 }
