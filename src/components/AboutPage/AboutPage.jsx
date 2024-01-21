@@ -11,7 +11,7 @@ function AboutPage() {
   return (
     <div className="container">
       <div>
-        <h2>Thank you so much for using the Exerciser Tracker app!</h2>
+        <h2 id="thank-you-line">Thank you so much for using the Exerciser Tracker app!</h2>
         <p>I wanted to create something that I would get real-life use from, and I'm
           happy to say that I've done that! Thank you to our instructor Chris Black, 
           everyone in the Taaffeite cohort, and to all of the staff at Prime Academy! 
