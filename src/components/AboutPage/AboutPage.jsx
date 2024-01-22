@@ -27,8 +27,7 @@ function AboutPage() {
           <li>PostgreSQL & Postico</li>
           <Footer></Footer>
       </div>
-    </div>
-    
+    </div>  
   );
 }
 

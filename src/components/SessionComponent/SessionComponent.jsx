@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
-import { StaticDatePicker } from '@mui/x-date-pickers';
-import { TextField, Button, Grid, Container, CardActions, Card, CardContent, Paper, Box } from "@mui/material";
+import { TextField, Button, Grid, Container, Card, CardContent, Paper, Box } from "@mui/material";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -24,35 +19,27 @@ function SessionComponent(props) {
     const dispatch = useDispatch();
     const dayID = useSelector(store => store.dayID)
     const [activateEditMode, setActivateEditMode] = useState(false);
-
-
     const [sessionDetails, setSessionDetails] = useState([]);
 
 
-
     const getSessionDetails = (id) => {
-        console.log("!!!!!!!!!!!!", sessionDetails)
-        console.log("in getSessionDetails function on DayPage");
+        console.log("in getSessionDetails function on DayPage, session details are:", sessionDetails)
         console.log("id is:", id);
         console.log("dayID.id is:", dayID.id);
         fetchSessionDetails({ id: id, theDayID: dayID.id })
             .then((response) => { setSessionDetails(response.data) })
     }
 
-
-
     async function fetchSessionDetails(payload) {
         try {
             console.log("THIS IS THE ACTION.PAYLOAD", payload)
             const response = await axios.get('/api/sessionDetail/details', { params: payload });
             return response;
-
         } catch (error) {
             console.log('Error in fetching session details', error)
             alert('Something went wrong!');
         }
     }
-
 
     const editMode = (id) => {
         console.log("in editMode function on DayPage");
@@ -61,14 +48,12 @@ function SessionComponent(props) {
         setActivateEditMode(!activateEditMode);
     }
 
-
     const handleFormChange = (event, index) => {
         const values = [...sessionDetails];
         values[index][event.target.name] = event.target.value;
         setSessionDetails(values);
-        console.log('!!!!!! edited SESSIONDETAILS values:', sessionDetails)
+        console.log('Edited SESSIONDETAILS values:', sessionDetails)
     }
-
 
     const sendNewSessionDetailsToServer = (id) => {
         console.log('in sendNewSessionDetailsToServer');
@@ -79,32 +64,7 @@ function SessionComponent(props) {
         setActivateEditMode(!activateEditMode);
     }
 
-
-    const deleteExercise = (id) => {
-        
-        // swal({
-        //     title: 'Are you sure?',
-        //     text: 'Do you want to delete this exercise?',
-        //     icon: 'warning',
-        //     buttons: true,
-        //     dangerMode: true,
-        // }).then(willDelete => {
-        //     console.log(willDelete);
-        //     if (willDelete) {
-        //         console.log(willDelete);
-        //         dispatch({ type: 'DELETE_EXERCISE', payload: { id: id, theDayID: dayID.id } });
-        //         swal({
-        //             title: 'Deleted!',
-        //             text: 'Your exercise has been deleted',
-        //             icon: 'success',
-        //             buttons: false,
-        //             timer: 1000,
-        //         });
-        //     } else {
-        //         swal('Cancelled', 'Your exercise was not deleted', 'error');
-        //     }
-        // });
-
+    const deleteExercise = (id) => {  
         swal({
             title: 'Are you sure?',
             text: 'Do you want to delete this exercise?',
@@ -127,25 +87,11 @@ function SessionComponent(props) {
                 swal('Cancelled', 'Your exercise was not deleted', 'error');
             }
         });
-
-
-
-
-
-
-
-
-
-        console.log("in deleteExercise function on DayPage");
-        console.log("id is:", id);
-        console.log("dayID.id is:", dayID.id);
-        dispatch({ type: 'DELETE_EXERCISE', payload: { id: id, theDayID: dayID.id } })
     }
 
     useEffect(() => {
         getSessionDetails(props.sessionData.exercise_id);
     }, []);
-
 
 
 
@@ -166,17 +112,13 @@ function SessionComponent(props) {
                                 }}
                                 key={props.sessionData.id}
                             >
-
-
                                 <CardContent>
                                     {activateEditMode === false ?
                                         <div>
                                             <Button
                                                 variant="contained"
                                                 id="delete-button"
-                                                onClick={(event) => deleteExercise(props.sessionData.exercise_id)} >DELETE</Button>
-
-
+                                                onClick={() => deleteExercise(props.sessionData.exercise_id)} >DELETE</Button>
                                             <EditIcon
                                                 onClick={() => editMode()}
                                                 sx={{ float: "right" }}></EditIcon>
@@ -191,19 +133,12 @@ function SessionComponent(props) {
                                     }
                                 </CardContent>
 
-
-                                <Grid container direction="column" justify="center" alignItems="center">
-
+                              <Grid container direction="column" justify="center" alignItems="center">
                                     <Box >
                                         <CardContent align="center">
-                                            {/* <p>Exercise ID: {props.sessionData.exercise_id}</p>  */}
-                                            {/* ^^ commenting out just for the solo project demo */}
                                             <h2>Exercise: {props.sessionData.exercise_name}</h2>
                                         </CardContent>
                                     </Box>
-
-
-
 
                                     <Box sx={{ width: '100%' }}>
                                         {activateEditMode === false ?
@@ -223,9 +158,7 @@ function SessionComponent(props) {
                                                                 <TableRow
                                                                     key={detail.id}
                                                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                                                >
-                                                                    {/* <p>{detail.id}</p>  */}
-                                                                    {/* ^^ this shows the row ID, used for testing */}
+                                                                >                                                                    
                                                                     <TableCell component="th" scope="row">{detail.set_number}</TableCell>
                                                                     <TableCell align="right">{detail.reps}</TableCell>
                                                                     <TableCell align="right">{detail.weight}</TableCell>
@@ -236,9 +169,7 @@ function SessionComponent(props) {
                                                 </TableContainer>
                                             </CardContent>
 
-
                                             :
-
 
                                             <CardContent>
                                                 <TableContainer component={Paper}>
@@ -251,9 +182,7 @@ function SessionComponent(props) {
                                                                     <TableCell align="right">Weight</TableCell>
                                                                 </TableRow>
                                                             </TableHead>
-
-
-                                                            {/* <Box >  adding the box messes with the columns for some reason!! */}
+                                                            
                                                             <TableBody >
                                                                 <>
                                                                     {sessionDetails.map((detail, index) => (
@@ -261,7 +190,6 @@ function SessionComponent(props) {
                                                                             key={detail.id}
                                                                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                                                         >
-
                                                                             <TableCell component="th" scope="row">
                                                                                 <TextField
                                                                                     required
@@ -277,8 +205,6 @@ function SessionComponent(props) {
                                                                                     }}
                                                                                 />
                                                                             </TableCell>
-
-
 
                                                                             <TableCell component="th" scope="row">
                                                                                 <TextField
@@ -296,8 +222,6 @@ function SessionComponent(props) {
                                                                                 />
                                                                             </TableCell>
 
-
-
                                                                             <TableCell component="th" scope="row">
                                                                                 <TextField
                                                                                     required
@@ -313,28 +237,17 @@ function SessionComponent(props) {
                                                                                     }}
                                                                                 />
                                                                             </TableCell>
-
                                                                         </TableRow>
                                                                     ))}
                                                                 </>
                                                             </TableBody>
-                                                            {/* </Box> */}
                                                         </Table>
                                                     </FormControl>
                                                 </TableContainer>
                                             </CardContent>
                                         }
                                     </Box>
-
-
-
-
-
-
-
                                 </Grid>
-
-
                             </Card>
                         </Grid>
                     </Paper>
@@ -343,7 +256,6 @@ function SessionComponent(props) {
         </>
     )
 }
-
 
 
 export default SessionComponent;

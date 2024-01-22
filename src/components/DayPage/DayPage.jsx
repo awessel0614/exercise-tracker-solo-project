@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { TextField, Button, Grid, Container, CardActions, Card, CardContent, Paper, Box } from "@mui/material";
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import { Button, Grid, Box } from "@mui/material";
 import SessionComponent from '../SessionComponent/SessionComponent';
 import './DayPage.css';
 
@@ -12,7 +10,6 @@ import './DayPage.css';
 function DayPage() {
     const dispatch = useDispatch();
     let history = useHistory();
-    const sessionDetails = useSelector(store => store.sessionDetails)
     const session = useSelector(store => store.session)
     const dayID = useSelector(store => store.dayID)
 
@@ -66,8 +63,7 @@ return (
 
     {session.length > 0 ? 
         <div>
-            <Grid container sx={{justifyContent: "center"}}>
-                               
+            <Grid container sx={{justifyContent: "center"}}>                              
                 {session.map(item => {                  
                     return(           
                         <SessionComponent key={item.exercise_id} sessionData={item}></SessionComponent>           
