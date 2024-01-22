@@ -10,13 +10,11 @@ import './DayPage.css';
 
 
 function DayPage() {
-    //var moment = require('moment');
     const dispatch = useDispatch();
     let history = useHistory();
     const sessionDetails = useSelector(store => store.sessionDetails)
     const session = useSelector(store => store.session)
     const dayID = useSelector(store => store.dayID)
-
 
 
     
@@ -46,18 +44,8 @@ function DayPage() {
     }, [dayID]);
 
 
-    // const formattedDate = moment(session[0].session_date).format("dddd, l"); 
-    // console.log(formattedDate);
-
-
 return (
     <>
-    {/* {sessionDetails.length > 0 ? 
-        <p>No exercises to display!</p>
-    
-    : <p>hi</p>} */}
-
-
     <Button
         id="back-btn"
         variant="contained"
@@ -74,23 +62,12 @@ return (
         onClick={goToExerciseForm}
         >Add Exercise +</Button>
     </Box>
-  
-    {/* <h2>Day ID: {dayID.id}</h2> */}
     
-    {/* ^^delete the line above, it was just for spacing!!! */}
-    
-
 
     {session.length > 0 ? 
         <div>
             <Grid container sx={{justifyContent: "center"}}>
- 
-                {/* {formattedDate !== null ? 
-                <h1> {formattedDate}</h1> : ""
-                } */}
                                
-                
-
                 {session.map(item => {                  
                     return(           
                         <SessionComponent key={item.exercise_id} sessionData={item}></SessionComponent>           
@@ -100,17 +77,11 @@ return (
         </div>
     
         : 
+
         <div>
             <h1 id="no-exercises">No exercises to display!</h1>
-                        
-            {/* <Button
-            variant="contained"
-            onClick={goToExerciseForm}
-            >Add Exercise</Button> */}
         </div>
-        }
-
-        
+        }       
     </>
 )
 }
