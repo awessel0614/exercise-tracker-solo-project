@@ -33,9 +33,10 @@ function CalendarPage() {
        
     }
 
+    
+
     return (
-        <>
-            
+        <>           
         <h1 id="pick-a-date-text">Pick a date to add exercises to!</h1>
         <Box container sx ={{justifyContent: "center", alignItems: "center", textAlign: "center"}}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -57,8 +58,6 @@ function CalendarPage() {
                     }}
                 />
             </LocalizationProvider>
-
-            {/* <p>here's the day : {chosenDate}</p> */}
             
             <Button 
                 id="lets-go-btn"
@@ -66,8 +65,7 @@ function CalendarPage() {
                 onClick={goToDayPage}
                 sx={{textTransform: "none", bgcolor: '#567d78', alignItems: "center"}}
                 >Let's Go!</Button>
-        </Box>
-            
+        </Box>          
         </>
     )
 }

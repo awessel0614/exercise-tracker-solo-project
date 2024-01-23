@@ -5,26 +5,6 @@ const router = express.Router();
 
 
 
-
-
-//   router.get('/:id', (req, res) => {
-//     console.log("in sessionDetailrouter GET, params is:", req.params + "req.body is:", req.body)
-//     pool.query(
-        
-//         `SELECT "set_number", "reps", "weight" FROM "session_details"
-//         WHERE "exercise_id" = $1 AND "session_id" = $2;`,
-
-//         [req.params.id]
-//     ).then((result) => {
-//       res.send(result.rows);
-//     }).catch((error) => {
-//       console.log('Error in GET /api/sessionDetail', error);
-//       res.sendStatus(500);
-//     }); 
-//   });
-// changing the /:id to something different for testing purposes
-
-
 //GET for highest weight amount based on exercise selection
 router.get('/highestWeight', (req, res) => {
   console.log("in sessionDetailrouter GET for highest weight, req.query.id is:", req.query.id)
@@ -47,6 +27,7 @@ router.get('/highestWeight', (req, res) => {
 });
 
 
+
 //GET for session details of particular exercise on particular day
   router.get('/details', (req, res) => {
     console.log("in sessionDetailrouter GET, req.query is:", req.query)
@@ -65,8 +46,8 @@ router.get('/highestWeight', (req, res) => {
   });
 
 
-//DELETE
 
+//DELETE
 router.delete('/deleteExercise', (req, res) => {
     console.log("in sessionDetailrouter DELETE, req.query is:", req.query)
     pool.query(
@@ -112,9 +93,7 @@ router.post('/', async (req, res) => {
 
 
 
-
 //PUT
-
 router.put('/updateExercise', async (req, res) => {
     console.log('in PUT for session detail router, req.body is', req.body)
     const db = await pool.connect();
@@ -139,7 +118,6 @@ router.put('/updateExercise', async (req, res) => {
         db.release();
     }
 });
-
 
 
 
