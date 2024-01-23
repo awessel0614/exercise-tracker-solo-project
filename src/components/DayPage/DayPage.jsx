@@ -1,21 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { TextField, Button, Grid, Container, CardActions, Card, CardContent, Paper, Box } from "@mui/material";
+import { Button, Grid, Box } from "@mui/material";
 import SessionComponent from '../SessionComponent/SessionComponent';
 import './DayPage.css';
 
 
 
 function DayPage() {
-    //var moment = require('moment');
     const dispatch = useDispatch();
     let history = useHistory();
-    const sessionDetails = useSelector(store => store.sessionDetails)
     const session = useSelector(store => store.session)
     const dayID = useSelector(store => store.dayID)
-
 
 
     
@@ -45,34 +41,43 @@ function DayPage() {
     }, [dayID]);
 
 
-    // const formattedDate = moment(session[0].session_date).format("dddd, l"); 
-    // console.log(formattedDate);
-
-
 return (
     <>
     <Button
+        id="back-btn"
         variant="contained"
         onClick={goToCalendarPage}
-        >Go to Calendar</Button>
-
-  
-    <h2>Day ID: {dayID.id}</h2>
+        sx={{marginLeft: '15px'}}
+        >Back</Button>
+    <br></br>
+    <br></br>
     
-    <Grid container sx={{justifyContent: "center"}}> 
-    {/* <h1> {formattedDate}</h1> */}
+    <Box textAlign="center">    
     <Button
+        id="add-exercise-btn"
         variant="contained"
         onClick={goToExerciseForm}
-        >Add Exercise</Button>
+        >Add Exercise +</Button>
+    </Box>
+    
 
-    {session.map(item => {
-        
-        return(           
-            <SessionComponent key={item.exercise_id} sessionData={item}></SessionComponent>           
-        )
-        })}
-    </Grid>
+    {session.length > 0 ? 
+        <div>
+            <Grid container sx={{justifyContent: "center"}}>                              
+                {session.map(item => {                  
+                    return(           
+                        <SessionComponent key={item.exercise_id} sessionData={item}></SessionComponent>           
+                    )
+                    })}
+            </Grid>
+        </div>
+    
+        : 
+
+        <div>
+            <h1 id="no-exercises">No exercises to display!</h1>
+        </div>
+        }       
     </>
 )
 }

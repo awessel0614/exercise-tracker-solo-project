@@ -1,0 +1,10 @@
+.container {
+    color: rgb(255, 255, 255);
+    text-shadow: 3px 3px 2px rgb(0, 0, 0);
+}
+
+
+#thank-you-line {
+    font-size: 35px;
+    font-family: 'Ruthie';
+}

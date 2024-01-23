@@ -19,7 +19,6 @@ function* sendSessionToServer(action) {
     try{
         let response = yield axios.post('/api/session', action.payload);
         yield put({ type: 'SET_DAYID', payload: response.data });
-        //yield put({ type: 'FETCH_SESSION'})
     } catch (error) {
         alert('Something went wront!');
         console.error('Error in adding session', error)

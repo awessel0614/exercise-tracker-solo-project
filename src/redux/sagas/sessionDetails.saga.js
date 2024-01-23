@@ -28,18 +28,6 @@ function* sendSessionDetailsToServer(action) {
     }
 }
 
-// function* fetchRemainingSessionDetails(action) {
-//     try{
-//         console.log("THIS IS THE ACTION.PAYLOAD", action.payload)
-//         const response = yield axios.get('/api/sessionDetail/remainingDetails', {params: action.payload});
-//         yield put({ type: 'SET_SESSION_DETAILS', payload: response.data });
-
-//     } catch (error) {
-//         console.log('Error in fetching session details', error)
-//         alert('Something went wrong!');
-//     }
-// }
-
 
 function* deleteExercise(action) {
     try{
@@ -52,6 +40,7 @@ function* deleteExercise(action) {
         throw error;
     }
 }
+
 
 function* editSessionDetails(action) {
     try{

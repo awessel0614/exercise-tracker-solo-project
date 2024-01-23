@@ -2,17 +2,23 @@
 Grid
 -------------------------------------------------------------------------------- */
 
-.grid {
-  display: flex;
-  flex: 0 1 auto;
-  /* defaults to 'row' */
-  flex-direction: row;
-  flex-wrap: wrap;
-  /* defaults to 'flex-start' */
-  justify-content: flex-start;
-  align-items: flex-start;
-}
+/* body {
+  background-image: url('/public/images/imageone.jpg');
+  background-size: cover;
+  background-position: center;
+} */
 
+/* .grid {
+  display: flex;
+  flex: 0 1 auto; */
+  /* defaults to 'row' */
+  /* flex-direction: row;
+  flex-wrap: wrap; */
+  /* defaults to 'flex-start' */
+  /* justify-content: flex-start;
+  align-items: flex-start;
+} */
+/* 
 .grid-col {
   flex: 0 0 auto;
   padding: 0 0.5rem 0.5rem;
@@ -77,4 +83,63 @@ Grid
 .grid-col_12 {
   flex-basis: 100%;
   max-width: 100%;
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+body {
+  background-image: url('/public/images/imageone.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  
+}
+
+
+.grid-col_4 {
+  flex-basis: 50%;
+  max-width: 50%;
+}
+
+#paragraph {
+  color: white;
+}
+
+#meet {
+  color:rgb(254, 255, 255);
+  text-shadow: 2px 2px 2px rgb(63, 149, 154);
 }

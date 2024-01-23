@@ -5,25 +5,21 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-
 import { useDispatch, useSelector } from 'react-redux';
-
 import Nav from '../Nav/Nav';
-import Footer from '../Footer/Footer';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import CalendarPage from '../CalendarPage/CalendarPage';
 import DayPage from '../DayPage/DayPage';
 import AddExerciseForm from '../AddExerciseForm/AddExerciseForm';
-
 import './App.css';
+
+
+
 
 function App() {
   const dispatch = useDispatch();
@@ -61,11 +57,11 @@ function App() {
             <UserPage />
           </ProtectedRoute>
 
-          <ProtectedRoute
+          {/* <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
             exact path="/info">
             <InfoPage />
-          </ProtectedRoute>
+          </ProtectedRoute> */}
 
           <Route exact path='/calendar'>
             <CalendarPage />
@@ -116,28 +112,16 @@ function App() {
             }
           </Route>
 
-         
-
-         
-
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
             <h1>404</h1>
           </Route>
         </Switch>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </Router>
   );
 }
 
 export default App;
-
-
-
-
-
-
-
-

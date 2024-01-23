@@ -11,6 +11,8 @@ function RegisterPage() {
       <RegisterForm />
 
       <center>
+        Already a member?
+        <br></br>
         <button
           type="button"
           className="btn btn_asLink"

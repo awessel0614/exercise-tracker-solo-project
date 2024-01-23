@@ -1,195 +1,12 @@
-// import axios from 'axios';
-// import React, { useEffect, useState } from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
-// import { useHistory } from 'react-router-dom';
-// import { TextField, Button, Grid, Container } from "@mui/material";
-
-
-// import Box from '@mui/material/Box';
-// import InputLabel from '@mui/material/InputLabel';
-// import MenuItem from '@mui/material/MenuItem';
-// import FormControl from '@mui/material/FormControl';
-// import Select from '@mui/material/Select';
-// import './AddExerciseForm.css';
-
-
-
-
-// function AddExerciseForm() {
-
-//     let history = useHistory();
-//     const dispatch = useDispatch();
-//     const exercises = useSelector(store => store.exercises)
-
-
-//     const getExercises = () => {
-//         axios.get('/api/exercise').then((response) => {
-//             const action = {type: 'SET_EXERCISES', payload: response.data};
-//             console.log("this is the payload", response.data )
-//             dispatch(action);
-//         }).catch((error) => {
-//             console.log('Error getting exercise list.', error);
-//             alert('Something went wrong!')
-//         })
-//     }
-
-//     useEffect(() => {
-//         getExercises();
-//     }, []);
-
-//         const [selectedExerciseId, setSelectedExerciseId] = useState('');
-//         const [selectedExercise, setSelectedExercise] = useState([{
-//             //session_id: '',
-//             exercise_id: '',
-//             set_number: '',
-//             reps: '',
-//             //weight: '',
-//             //isToggled: false
-//         }]);
-
-//         const handleExerciseChange = (event) => { 
-//            event.preventDefault();
-//            setSelectedExercise([
-//                 //...selectedExercise,
-//                 {exercise_id: event.target.value},
-//            ]) 
-//            console.log("this is the event.target.value for exercise ID", event.target.value);
-//         };
-
-
-//         const handleFormChange = (event, index) => { 
-//             //uses spread operator to grab the state of the values
-//             const values = [...selectedExercise];
-//             values[index][event.target.name] = event.target.value;
-//             setSelectedExercise(values);
-//             console.log('these are the values:', selectedExercise )  
-//          };
-
-
-//         const addSetRepRow = () => {
-//             setSelectedExercise([...selectedExercise, {exercise_id: selectedExercise[0].exercise_id, set_number: '', reps: ''}])
-//         }
-
-//         const deleteSetRepRow = (index) => {
-//             const values = [...selectedExercise];
-//             values.splice(index,1);
-//             setSelectedExercise(values);
-//             console.log('here are the values after row deletion:', selectedExercise)
-//         }
-
-//         const handleSubmit = (event) => {
-//             event.preventDefault();
-//             console.log("here are the form fields", selectedExercise)
-//             dispatch({ type: 'SEND_SESSION_DETAILS_TO_SERVER', payload: selectedExercise });
-//             setSelectedExercise([{exercise_id: '', set_number: '', reps: ''}]);
-
-//             history.push('/day');
-//         }
-
-
-
-
-//     return (
-//         <>
-//         <h1>Enter Exercise Info:</h1> 
-
-//         <Box sx={{ minWidth: 120 }}>
-//             <FormControl onSubmit={handleSubmit} fullWidth>
-//                 <InputLabel id="demo-simple-select-label">Select Exercise</InputLabel>
-//                     <Select
-//                         labelId="demo-simple-select-label"
-//                         id="demo-simple-select"
-//                         label="selectedExercise"
-//                         onChange={handleExerciseChange}
-//                         >
-//                         {exercises.map((exercise, i) =>
-//                             <MenuItem key={i} name={exercise.exercise_name} value={exercise.id}>{exercise.exercise_name}</MenuItem>
-//                         )}    
-//                     </Select>
-//                     <br></br>
-//                 <div>
-//                {selectedExercise.map((form, index) => {
-//                     return (
-//                         <div key={index}>
-//                             <TextField 
-//                                 name="set_number"
-//                                 placeholder="Set #"
-//                                 variant="filled"
-//                                 onChange={event => handleFormChange(event, index)}
-//                                 value={form.set_number}
-//                             />
-//                             <TextField 
-//                                 name="reps"
-//                                 placeholder="Number of Reps i.e. 10"
-//                                 variant="filled"
-//                                 onChange={event => handleFormChange(event, index)}
-//                                 value={form.reps}
-//                             />
-//                             <br></br>
-//                             <Button 
-//                                 onClick={() => deleteSetRepRow(index)}
-//                             >Delete Set/Rep</Button>
-//                         </div>
-//                     )
-//                })}
-//                </div>
-//             </FormControl>
-//             <Button 
-//                 onClick={() => addSetRepRow()}
-//             >Add Set/Rep</Button>
-//             <br></br>
-//             <Button 
-//                 onClick={handleSubmit}
-//             >Submit</Button>
-//         </Box>
-
-//         <br></br>
-//         <p>this is the id of the selected exercise: {selectedExercise[0].exercise_id}</p>
-//         </>
-//     )
-
-// }
-
-// export default AddExerciseForm;
-
-
-// ^^ this works
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { TextField, Button, Grid, Container } from "@mui/material";
+import { TextField, Button, Card, CardContent, Grid } from "@mui/material";
 import Icon from '@mui/material/Icon';
 import { green } from '@mui/material/colors';
 import { red } from '@mui/material/colors';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -202,12 +19,11 @@ import swal from 'sweetalert';
 
 
 function AddExerciseForm() {
-    const session = useSelector(store => store.session)
+    let history = useHistory();
+    const dispatch = useDispatch();
     const dayID = useSelector(store => store.dayID)
-
-
-
-        let history = useHistory();
+    const exercises = useSelector(store => store.exercises)
+    const [highestWeight, setHighestWeight] = useState(0);
 
 
         const getExercises = () => {
@@ -220,7 +36,6 @@ function AddExerciseForm() {
                 alert('Something went wrong!')
             })
         }
-
     
         useEffect(() => {
             getExercises();
@@ -228,8 +43,7 @@ function AddExerciseForm() {
 
         const [selectedExercise, setSelectedExercise] = useState({
             session_id: dayID.id,
-            exercise_id: 'test',
-           
+            exercise_id: 'test',           
         });
 
         const handleExerciseChange = (event) => { 
@@ -237,10 +51,17 @@ function AddExerciseForm() {
                 ...selectedExercise,
                 exercise_id: event.target.value,
            }) 
+
+           axios.get('/api/sessionDetail/highestWeight', {params: {id: event.target.value}})
+                .then(response => {
+                    setHighestWeight(response.data);
+                    console.log("THIS IS HIGHEST WEIGHT", highestWeight);                    
+                }).catch((error) => {
+                    console.error(error);
+                    alert('Something went wrong!');
+                }); 
            console.log("this is the event.target.value for exercise ID", event.target.value);
         };
-
-
 
 
         const [formFields, setFormFields] = useState([
@@ -267,7 +88,6 @@ function AddExerciseForm() {
             console.log('here are the values after row deletion:', formFields)
         }
 
-
         const handleSubmit = (event) => {
             event.preventDefault();
             if (selectedExercise.exercise_id === 'test' || formFields[0].set_number === '' || formFields[0].reps === '' || formFields[0].weight === '') {
@@ -282,8 +102,7 @@ function AddExerciseForm() {
             console.log("here are the form fields", selectedExercise)
             dispatch({ type: 'SEND_SESSION_DETAILS_TO_SERVER', payload: {selectedExercise, formFields} });
             setSelectedExercise([{exercise_id: '', set_number: '', reps: '', weight: ''}]);
-            history.push('/day');
-            
+            history.push('/day');            
             }
         }
 
@@ -294,22 +113,26 @@ function AddExerciseForm() {
         }
 
 
-    const dispatch = useDispatch();
-    const exercises = useSelector(store => store.exercises)
-
-
-    
-
 
     return (
         <>
-        <Grid container direction="column" justify="center" alignItems="center">
-        <Button variant="contained" sx = {{float: "left"}} onClick = {goToDayPage}>Back To Day Page</Button>
-        <h2>Day id:{dayID.id}</h2>
-        <h1>Enter Exercise:</h1>
+        <Button 
+            id="back-to-day-page-btn"
+            variant="contained" 
+            sx = {{float: "left", backgroundColor: "#567d78", marginLeft: '15px'}} 
+            onClick = {goToDayPage}>Back</Button>
 
+        <Grid container direction="column" justify="center" alignItems="center">
+        
+        <h1 id="enter-exercise">Enter Exercise:</h1>
+        
+        
         <Box sx={{ minWidth: 120 }}>
-            <FormControl required onSubmit={handleSubmit}  fullWidth>
+            <Card
+                sx={{margin: '10px'}}
+            >
+            <CardContent>
+            <FormControl required={true} onSubmit={handleSubmit}  fullWidth>
                 <InputLabel id="demo-simple-select-label">Select Exercise</InputLabel>
                     <Select
                         required
@@ -324,17 +147,30 @@ function AddExerciseForm() {
                             <MenuItem key={i} name={exercise.exercise_name} value={exercise.id}>{exercise.exercise_name}</MenuItem>
                         )}    
                     </Select>
+
+                    {highestWeight.length > 0 ?     
+                        <>
+                        <p id="pr-line">Your PR for this exercise is: {highestWeight[0].weight} lbs</p>
+                        </>
+                        :
+                        ""}
                     <br></br>
                 <div>
                {formFields.map((form, index) => {
                     return (
                         <>
                         <div key={index}>
-                        <Grid container margin={1} spacing={1} padding={1}>
-                        <RemoveCircleIcon
+                        <Grid container margin={1} spacing={1} padding={1} >
+                        {index !== 0 ?
+                            <RemoveCircleIcon
                             sx={{ color: red[500], paddingTop: 3 }}
-                            onClick={() => deleteSetRepRow()}
+                            onClick={() => deleteSetRepRow(index)}
                         />
+                        : 
+                        <RemoveCircleIcon
+                            sx={{ opacity: '0%', paddingTop: 3 }}                       
+                        />
+                        }
                             <TextField 
                                 required
                                 name="set_number"
@@ -342,7 +178,7 @@ function AddExerciseForm() {
                                 variant="filled"
                                 onChange={event => handleFormChange(event, index)}
                                 value={form.set_number}
-                                sx = {{ width: 60, 
+                                sx = {{ width: '20%', 
                                         "& .MuiInputBase-root": 80,
                                         padding: .5,
                                         
@@ -351,11 +187,11 @@ function AddExerciseForm() {
                             <TextField 
                                 required
                                 name="reps"
-                                placeholder="Rep# ie 10"
+                                placeholder="Rep #"
                                 variant="filled"
                                 onChange={event => handleFormChange(event, index)}
                                 value={form.reps}
-                                sx = {{ width: 105, 
+                                sx = {{ width: '25%', 
                                     "& .MuiInputBase-root": 80,
                                     padding: .5  
                                 }}
@@ -367,12 +203,11 @@ function AddExerciseForm() {
                                 variant="filled"
                                 onChange={event => handleFormChange(event, index)}
                                 value={form.weight}
-                                sx = {{ width: 115, 
+                                sx = {{ width: '25%', 
                                     "& .MuiInputBase-root": 80,
                                     padding: .5  
                                 }}
-                            />
-                            
+                            />                         
                             <link
                             rel="stylesheet"
                             href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -386,23 +221,21 @@ function AddExerciseForm() {
                     )
                })}
                </div>
-            </FormControl>
-           
+            </FormControl>          
             <br></br>
+            </CardContent>
+            </Card>
             </Box>
             <Button 
+                id="looks-good-btn"
                 onClick={handleSubmit}
                 variant="contained"
-                sx ={{alignItems: "center"}}
+                sx ={{alignItems: "center", backgroundColor: "#567d78"}}
             >Looks Good!</Button>
-        
-
         <br></br>
-        <p>this is the id of the selected exercise: {selectedExercise.exercise_id}</p>
         </Grid>
         </>
     )
-
 }
 
 export default AddExerciseForm;
